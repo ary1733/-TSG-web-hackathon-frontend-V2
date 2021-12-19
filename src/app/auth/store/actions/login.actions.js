@@ -11,6 +11,7 @@ export function submitLogin({email, password})
     return (dispatch) =>
         jwtService.signInWithEmailAndPassword(email, password)
             .then((user) => {
+                    console.log(user)
                     dispatch(setUserData(user));
 
                     return dispatch({
@@ -19,6 +20,8 @@ export function submitLogin({email, password})
                 }
             )
             .catch(error => {
+                console.log("catch login error")
+                console.log(error)
                 return dispatch({
                     type   : LOGIN_ERROR,
                     payload: error

@@ -84,11 +84,11 @@ function Login()
                         {selectedTab === 1 && <FirebaseLoginTab/>}
                         {/* {selectedTab === 2 && <Auth0LoginTab/>} */}
 
-                        <div className="flex flex-col items-center justify-center pt-32">
+                        {/* <div className="flex flex-col items-center justify-center pt-32">
                             <span className="font-medium">Don't have an account?</span>
                             <Link className="font-medium" to="/register">Create an account</Link>
                             <Link className="font-medium mt-8" to="/">Back to Dashboard</Link>
-                        </div>
+                        </div> */}
 
                     </CardContent>
                 </Card>

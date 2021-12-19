@@ -4,10 +4,12 @@ import {FuseUtils} from '@fuse';
 import {ExampleConfig} from 'app/main/example/ExampleConfig';
 import LoginPage from 'app/main/login/LoginPage';
 import { LoginConfig } from 'app/main/login/LoginConfig';
+import { AcademyAppConfig } from 'app/main/academy/AcademyAppConfig';
 
 const routeConfigs = [
     ExampleConfig,
-    LoginConfig
+    LoginConfig,
+    AcademyAppConfig
 ];
 
 const routes = [

@@ -35,13 +35,7 @@ function JWTLoginTab(props)
 
     function handleSubmit(model)
     {
-
-        alert("Implement the logic for the Login and Route user to particular page ");
-        //dispatch(authActions.submitLogin(model));
-        console.log("username "+model.email)
-        console.log("password "+model.password)
-        
-        console.log(model)
+        dispatch(authActions.submitLogin(model));
     }
 
     return (
@@ -83,7 +77,7 @@ function JWTLoginTab(props)
                         minLength: 'Min character length is 4'
                     }}
                     InputProps={{
-                        endAdornment: <InputAdornment position="end"><Icon className="text-20" color="action">vpn_key</Icon></InputAdornment>
+                        endAdornment: <InputAdornment position='end'><Icon className="text-20" color="action">vpn_key</Icon></InputAdornment>
                     }}
                     variant="outlined"
                     required
@@ -103,7 +97,7 @@ function JWTLoginTab(props)
 
             </Formsy>
 
-            <div className="flex flex-col items-center pt-24">
+            {/* <div className="flex flex-col items-center pt-24">
                 <Typography className="text-14 font-600 py-8">
                     Credentials
                 </Typography>
@@ -131,7 +125,7 @@ function JWTLoginTab(props)
                         </tr>
                     </tbody>
                 </table>
-            </div>
+            </div> */}
 
         </div>
     );

@@ -1,3 +1,4 @@
+import {AcademyAppConfig} from "../main/academy/AcademyAppConfig"  
 const navigationConfig = [
     {
         'id'      : 'applications',
@@ -11,6 +12,13 @@ const navigationConfig = [
                 'type' : 'item',
                 'icon' : 'whatshot',
                 'url'  : '/example'
+            },
+            {
+                'id'   : 'events',
+                'title': 'Events @IITKgp',
+                'type' : 'item',
+                'icon' : 'event',
+                'url'  : AcademyAppConfig.routes[1].path
             }
         ]
     }
