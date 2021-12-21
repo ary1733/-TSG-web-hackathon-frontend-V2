@@ -4,7 +4,7 @@ import {darken} from '@material-ui/core/styles/colorManipulator';
 import {FuseAnimate} from '@fuse';
 import {Link} from 'react-router-dom';
 import clsx from 'clsx';
-import JWTLoginTab from './tabs/JWTLoginTab';
+import OfficialLoginTab from './tabs/OfficialLoginTab';
 import FirebaseLoginTab from './tabs/FirebaseLoginTab';
 import Auth0LoginTab from './tabs/Auth0LoginTab';
 import {makeStyles} from '@material-ui/styles';
@@ -79,7 +79,7 @@ function Login()
                             /> */}
                         </Tabs>
 
-                        {selectedTab === 0 && <JWTLoginTab/>}
+                        {selectedTab === 0 && <OfficialLoginTab/>}
                         {selectedTab === 1 && <FirebaseLoginTab/>}
                         {/* {selectedTab === 2 && <Auth0LoginTab/>} */}
 

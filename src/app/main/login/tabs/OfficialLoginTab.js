@@ -5,7 +5,7 @@ import Formsy from 'formsy-react';
 import * as authActions from 'app/auth/store/actions';
 import {useDispatch, useSelector} from 'react-redux';
 
-function JWTLoginTab(props)
+function OfficialLoginTab(props)
 {
     const dispatch = useDispatch();
     const login = useSelector(({auth}) => auth.login);
@@ -131,4 +131,4 @@ function JWTLoginTab(props)
     );
 }
 
-export default JWTLoginTab;
+export default OfficialLoginTab;
