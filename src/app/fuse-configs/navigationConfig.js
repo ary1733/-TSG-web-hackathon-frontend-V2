@@ -11,31 +11,31 @@
                 'type' : 'item',
                 'icon' : 'whatshot',
                 'url'  : '/example'
-            },
-            {
-                'id'   : 'events',
+            }
+        ]
+    },
+    {
+        'id'   : 'events',
                 'title': 'Events @IITKgp',
-                'type' : 'collapse',
+                'type' : 'group',
                 'icon' : 'event',
                 'badge'   : {
                     'title': 2,
                     'bg'   : '#525E8A',
                     'fg'   : '#FFFFFF'
                 },
-                'children': [
-                    {
-                        'id'   : 'upcoming-events',
-                        'title': 'Upcoming Events',
-                        'type' : 'item',
-                        'url'  : '/events/upcoming'
-                    },
-                    {
-                        'id'   : 'Results',
-                        'title': 'Results',
-                        'type' : 'item',
-                        'url'  : '/events/results'
-                    }
-                ]
+        'children': [
+            {
+                'id'   : 'upcoming-events',
+                'title': 'Upcoming Events',
+                'type' : 'item',
+                'url'  : '/events/upcoming'
+            },
+            {
+                'id'   : 'Results',
+                'title': 'Results',
+                'type' : 'item',
+                'url'  : '/events/results'
             }
         ]
     }
