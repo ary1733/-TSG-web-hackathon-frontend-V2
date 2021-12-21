@@ -112,20 +112,19 @@ function Courses(props)
 
                 <FuseAnimate animation="transition.slideUpIn" duration={400} delay={100}>
                     <Typography color="inherit" className="text-24 sm:text-40 font-light">
-                        WELCOME TO ACADEMY
+                        Current and Upcoming Events
                     </Typography>
                 </FuseAnimate>
 
                 <FuseAnimate duration={400} delay={600}>
                     <Typography variant="subtitle1" color="inherit" className="mt-8 sm:mt-16 mx-auto max-w-512">
                             <span className="opacity-75">
-                                Our courses will step you through the process of building a small application, or adding a new feature to an existing
-                                application.
+                                These events will add some refreshing content in your journey.
                             </span>
                     </Typography>
                 </FuseAnimate>
 
-                <Icon className={classes.headerIcon}>school</Icon>
+                <Icon className={classes.headerIcon}>event</Icon>
             </div>
 
             <div className="flex flex-col flex-1 max-w-2xl w-full mx-auto px-8 sm:px-16 py-24">
@@ -192,11 +191,12 @@ function Courses(props)
                                                     >
                                                         <Typography className="font-medium truncate" color="inherit">{category.label}</Typography>
                                                         <div className="flex items-center justify-center opacity-75">
-                                                            <Icon className="text-20 mr-8" color="inherit">access_time</Icon>
-                                                            <div className="text-16 whitespace-no-wrap">{course.length} min</div>
+                                                            <Icon className="text-20 mr-8" color="inherit">date_range</Icon>
+                                                            <div className="text-16 whitespace-no-wrap">{course.length} days</div>
                                                         </div>
                                                     </div>
                                                     <CardContent className="flex flex-col flex-auto items-center justify-center">
+                                                        {/* content of events here */}
                                                         <Typography className="text-center text-16 font-400">{course.title}</Typography>
                                                         <Typography className="text-center text-13 font-600 mt-4" color="textSecondary">{course.updated}</Typography>
                                                     </CardContent>
@@ -208,13 +208,13 @@ function Courses(props)
                                                             className="justify-start px-32"
                                                             color="secondary"
                                                         >
-                                                            {buttonStatus(course)}
+                                                            View
                                                         </Button>
                                                     </CardActions>
                                                     <LinearProgress
                                                         className="w-full"
                                                         variant="determinate"
-                                                        value={course.activeStep * 100 / course.totalSteps}
+                                                        value={course.activeStep * 100 / course.totalSteps} // this can show the progress in event
                                                         color="secondary"
                                                     />
                                                 </Card>
@@ -226,7 +226,7 @@ function Courses(props)
                             (
                                 <div className="flex flex-1 items-center justify-center">
                                     <Typography color="textSecondary" className="text-24 my-24">
-                                        No courses found!
+                                        No events found!
                                     </Typography>
                                 </div>
                             )
