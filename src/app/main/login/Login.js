@@ -37,14 +37,13 @@ function Login()
 
                 <FuseAnimate animation="transition.slideUpIn" delay={300}>
                     <Typography variant="h3" color="inherit" className="font-light">
-                        Welcome to the FUSE!
+                        Welcome to localhost:KGP!
                     </Typography>
                 </FuseAnimate>
 
                 <FuseAnimate delay={400}>
                     <Typography variant="subtitle1" color="inherit" className="max-w-512 mt-16">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper nisl erat, vel convallis elit fermentum pellentesque. Sed mollis velit
-                        facilisis facilisis.
+                        Your true friend in your kgp journey.
                     </Typography>
                 </FuseAnimate>
             </div>

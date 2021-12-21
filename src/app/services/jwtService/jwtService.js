@@ -64,12 +64,12 @@ class jwtService extends FuseUtils.EventEmitter {
         });
     };
 
-    signInWithEmailAndPassword = (email, password) => {
+    signInWithUsernameAndPassword = (username, password) => {
 
         return new Promise((resolve, reject) => {
             axios.post('api/login/official/auth/', {
                  
-                'username':email,
+                username,
                 password
                 
             }).then(response => {
