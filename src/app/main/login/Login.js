@@ -5,7 +5,7 @@ import {FuseAnimate} from '@fuse';
 import {Link} from 'react-router-dom';
 import clsx from 'clsx';
 import OfficialLoginTab from './tabs/OfficialLoginTab';
-import FirebaseLoginTab from './tabs/FirebaseLoginTab';
+import StudentLoginTab from './tabs/StudentLoginTab';
 import Auth0LoginTab from './tabs/Auth0LoginTab';
 import {makeStyles} from '@material-ui/styles';
 
@@ -80,7 +80,7 @@ function Login()
                         </Tabs>
 
                         {selectedTab === 0 && <OfficialLoginTab/>}
-                        {selectedTab === 1 && <FirebaseLoginTab/>}
+                        {selectedTab === 1 && <StudentLoginTab/>}
                         {/* {selectedTab === 2 && <Auth0LoginTab/>} */}
 
                         {/* <div className="flex flex-col items-center justify-center pt-32">

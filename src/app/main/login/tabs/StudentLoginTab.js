@@ -7,7 +7,7 @@ import * as authActions from 'app/auth/store/actions';
 import {useDispatch, useSelector} from 'react-redux';
 import axios from 'axios';
 
-function FirebaseLoginTab(props)
+function StudentLoginTab(props)
 {
     const dispatch = useDispatch();
     const login = useSelector(({auth}) => auth.login);
@@ -147,4 +147,4 @@ function FirebaseLoginTab(props)
     );
 }
 
-export default FirebaseLoginTab;
+export default StudentLoginTab;
