@@ -1,7 +1,7 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
 
-export const upcomingEventsConfig = {
+export const currentEventsConfig = {
     settings: {
         layout: {
             style : 'layout1', // layout-1 layout-2 layout-3
@@ -10,7 +10,7 @@ export const upcomingEventsConfig = {
     },
     routes  : [
         {
-            path     : '/events/upcoming',
+            path     : '/events/current',
             component: React.lazy(() => import('./events/Events'))
         }
     ]

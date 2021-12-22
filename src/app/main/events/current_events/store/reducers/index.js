@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
-import upcoming_events from './events.reducer';
+import current_events from './events.reducer';
 
 const reducer = combineReducers({
-    upcoming_events
+    current_events
 });
 
 export default reducer;
