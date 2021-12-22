@@ -46,8 +46,8 @@ const useStyles = makeStyles(theme => ({
 function Events(props)
 {
     const dispatch = useDispatch();
-    const events = useSelector(({Events}) => Events.events.data);
-    const categories = useSelector(({Events}) => Events.events.categories);
+    const events = useSelector(({upcomingEvents}) => upcomingEvents.upcoming_events.data);
+    const categories = useSelector(({upcomingEvents}) => upcomingEvents.upcoming_events.categories);
 
     const classes = useStyles(props);
     const theme = useTheme();
@@ -241,4 +241,4 @@ function Events(props)
     );
 }
 
-export default withReducer('Events', reducer)(Events);
+export default withReducer('upcomingEvents', reducer)(Events);

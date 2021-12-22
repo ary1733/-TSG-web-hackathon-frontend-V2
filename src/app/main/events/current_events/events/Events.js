@@ -46,8 +46,8 @@ const useStyles = makeStyles(theme => ({
 function Events(props)
 {
     const dispatch = useDispatch();
-    const events = useSelector(({Events}) => Events.events.data);
-    const categories = useSelector(({Events}) => Events.events.categories);
+    const events = useSelector(({Events}) => Events.current_events.data);
+    const categories = useSelector(({Events}) => Events.current_events.categories);
 
     const classes = useStyles(props);
     const theme = useTheme();
