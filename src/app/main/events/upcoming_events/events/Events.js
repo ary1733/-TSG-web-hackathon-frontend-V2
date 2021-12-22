@@ -202,8 +202,8 @@ function Events(props)
                                                         {/* content of events here */}
                                                         <Typography className="text-center text-16 font-400">{event.title}</Typography>
                                                         <Typography className="text-center text-13 font-600 mt-4" color="textSecondary">Organiser - {event.organiser}</Typography>
-                                                        <Typography className="text-center text-13 font-600 mt-4" color="textSecondary">Start - {moment(event.start).format('YYYY-MM-DD HH:mm:ss')}</Typography>
-                                                        <Typography className="text-center text-13 font-600 mt-4" color="textSecondary">End - {moment(event.end).format('YYYY-MM-DD HH:mm:ss')}</Typography>
+                                                        <Typography className="text-center text-13 font-600 mt-4" color="textSecondary">Start - {new Date(event.start).toDateString()}, {moment(event.start).format('HH:mm:ss')}</Typography>
+                                                        <Typography className="text-center text-13 font-600 mt-4" color="textSecondary">End - {new Date(event.end).toDateString()}, {moment(event.end).format('HH:mm:ss')}</Typography>
                                                     </CardContent>
                                                     <Divider/>
                                                     <CardActions className="justify-center">
