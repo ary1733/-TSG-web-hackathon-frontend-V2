@@ -45,8 +45,8 @@ const useStyles = makeStyles(theme => ({
 function Courses(props)
 {
     const dispatch = useDispatch();
-    const courses = useSelector(({academyApp}) => academyApp.courses.data);
-    const categories = useSelector(({academyApp}) => academyApp.courses.categories);
+    const courses = useSelector(({academyApp}) => academyApp.events.data);
+    const categories = useSelector(({academyApp}) => academyApp.events.categories);
 
     const classes = useStyles(props);
     const theme = useTheme();
@@ -55,8 +55,8 @@ function Courses(props)
     const [selectedCategory, setSelectedCategory] = useState('all');
 
     useEffect(() => {
+        dispatch(Actions.getUpcoming());
         dispatch(Actions.getCategories());
-        dispatch(Actions.getCourses());
     }, [dispatch]);
 
     useEffect(() => {
@@ -64,12 +64,14 @@ function Courses(props)
         {
             if ( searchText.length === 0 && selectedCategory === "all" )
             {
+                console.log(courses);
                 return courses;
             }
 
             return _.filter(courses, item => {
-                if ( selectedCategory !== "all" && item.category !== selectedCategory )
+                if ( selectedCategory !== "all" && item.type.toLowerCase() !== selectedCategory.toLowerCase() )
                 {
+                    console.log(item.type, selectedCategory);
                     return false;
                 }
                 return item.title.toLowerCase().includes(searchText.toLowerCase())
@@ -177,10 +179,10 @@ function Courses(props)
                                     }}
                                     className="flex flex-wrap py-24"
                                 >
-                                    {filteredData.map((course) => {
-                                        const category = categories.find(_cat => _cat.value === course.category);
+                                    {filteredData.map((event) => {
+                                        const category = categories.find(_cat => _cat.value.toLowerCase() === event.type.toLowerCase());
                                         return (
-                                            <div className="w-full pb-24 sm:w-1/2 lg:w-1/3 sm:p-16" key={course.id}>
+                                            <div className="w-full pb-24 sm:w-1/2 lg:w-1/3 sm:p-16" key={event.id}>
                                                 <Card elevation={1} className="flex flex-col h-256">
                                                     <div
                                                         className="flex flex-shrink-0 items-center justify-between px-24 h-64"
@@ -192,18 +194,18 @@ function Courses(props)
                                                         <Typography className="font-medium truncate" color="inherit">{category.label}</Typography>
                                                         <div className="flex items-center justify-center opacity-75">
                                                             <Icon className="text-20 mr-8" color="inherit">date_range</Icon>
-                                                            <div className="text-16 whitespace-no-wrap">{course.length} days</div>
+                                                            {/* <div className="text-16 whitespace-no-wrap">{course.length} days</div> */}
                                                         </div>
                                                     </div>
                                                     <CardContent className="flex flex-col flex-auto items-center justify-center">
                                                         {/* content of events here */}
-                                                        <Typography className="text-center text-16 font-400">{course.title}</Typography>
-                                                        <Typography className="text-center text-13 font-600 mt-4" color="textSecondary">{course.updated}</Typography>
+                                                        <Typography className="text-center text-16 font-400">{event.title}</Typography>
+                                                        <Typography className="text-center text-13 font-600 mt-4" color="textSecondary">{event.organiser}</Typography>
                                                     </CardContent>
                                                     <Divider/>
                                                     <CardActions className="justify-center">
                                                         <Button
-                                                            to={`/events/${course.id}/${course.slug}`}
+                                                            to={`/`}
                                                             component={Link}
                                                             className="justify-start px-32"
                                                             color="secondary"
@@ -214,7 +216,7 @@ function Courses(props)
                                                     <LinearProgress
                                                         className="w-full"
                                                         variant="determinate"
-                                                        value={course.activeStep * 100 / course.totalSteps} // this can show the progress in event
+                                                        value={0} // this can show the progress in event
                                                         color="secondary"
                                                     />
                                                 </Card>

@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux';
-import courses from './courses.reducer';
+import events from './events.reducer';
 import course from './course.reducer';
 
 const reducer = combineReducers({
-    courses,
+    events,
     course
 });
 

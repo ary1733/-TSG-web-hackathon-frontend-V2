@@ -1,2 +1,2 @@
-export * from './courses.actions';
+export * from './events.actions';
 export * from './course.actions';
