@@ -24,6 +24,7 @@ import _ from '@lodash';
 import {Link} from 'react-router-dom';
 import * as Actions from '../store/actions';
 import reducer from '../store/reducers';
+import moment from 'moment';
 
 const useStyles = makeStyles(theme => ({
     header    : {
@@ -42,11 +43,11 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function Courses(props)
+function Events(props)
 {
     const dispatch = useDispatch();
-    const courses = useSelector(({academyApp}) => academyApp.events.data);
-    const categories = useSelector(({academyApp}) => academyApp.events.categories);
+    const events = useSelector(({Events}) => Events.events.data);
+    const categories = useSelector(({Events}) => Events.events.categories);
 
     const classes = useStyles(props);
     const theme = useTheme();
@@ -55,7 +56,7 @@ function Courses(props)
     const [selectedCategory, setSelectedCategory] = useState('all');
 
     useEffect(() => {
-        dispatch(Actions.getUpcoming());
+        dispatch(Actions.getCurrent());
         dispatch(Actions.getCategories());
     }, [dispatch]);
 
@@ -64,11 +65,11 @@ function Courses(props)
         {
             if ( searchText.length === 0 && selectedCategory === "all" )
             {
-                console.log(courses);
-                return courses;
+                console.log(events);
+                return events;
             }
 
-            return _.filter(courses, item => {
+            return _.filter(events, item => {
                 if ( selectedCategory !== "all" && item.type.toLowerCase() !== selectedCategory.toLowerCase() )
                 {
                     console.log(item.type, selectedCategory);
@@ -78,11 +79,11 @@ function Courses(props)
             });
         }
 
-        if ( courses )
+        if ( events )
         {
             setFilteredData(getFilteredArray());
         }
-    }, [courses, searchText, selectedCategory]);
+    }, [events, searchText, selectedCategory]);
 
     function handleSelectedCategory(event)
     {
@@ -114,7 +115,7 @@ function Courses(props)
 
                 <FuseAnimate animation="transition.slideUpIn" duration={400} delay={100}>
                     <Typography color="inherit" className="text-24 sm:text-40 font-light">
-                        Current and Upcoming Events
+                        Current Events
                     </Typography>
                 </FuseAnimate>
 
@@ -132,7 +133,7 @@ function Courses(props)
             <div className="flex flex-col flex-1 max-w-2xl w-full mx-auto px-8 sm:px-16 py-24">
                 <div className="flex flex-col flex-shrink-0 sm:flex-row items-center justify-between py-24">
                     <TextField
-                        label="Search for a course"
+                        label="Search for a event"
                         placeholder="Enter a keyword..."
                         className="flex w-full sm:w-320 mb-16 sm:mb-0 mx-16"
                         value={searchText}
@@ -194,18 +195,20 @@ function Courses(props)
                                                         <Typography className="font-medium truncate" color="inherit">{category.label}</Typography>
                                                         <div className="flex items-center justify-center opacity-75">
                                                             <Icon className="text-20 mr-8" color="inherit">date_range</Icon>
-                                                            {/* <div className="text-16 whitespace-no-wrap">{course.length} days</div> */}
+                                                            <div className="text-16 whitespace-no-wrap">{Math.floor(((new Date(event.end)) - (new Date(event.start))) / (1000*60*60*24))} days</div>
                                                         </div>
                                                     </div>
                                                     <CardContent className="flex flex-col flex-auto items-center justify-center">
                                                         {/* content of events here */}
                                                         <Typography className="text-center text-16 font-400">{event.title}</Typography>
-                                                        <Typography className="text-center text-13 font-600 mt-4" color="textSecondary">{event.organiser}</Typography>
+                                                        <Typography className="text-center text-13 font-600 mt-4" color="textSecondary">Organiser - {event.organiser}</Typography>
+                                                        <Typography className="text-center text-13 font-600 mt-4" color="textSecondary">Start - {moment(event.start).format('YYYY-MM-DD HH:mm:ss')}</Typography>
+                                                        <Typography className="text-center text-13 font-600 mt-4" color="textSecondary">End - {moment(event.end).format('YYYY-MM-DD HH:mm:ss')}</Typography>
                                                     </CardContent>
                                                     <Divider/>
                                                     <CardActions className="justify-center">
                                                         <Button
-                                                            to={`/`}
+                                                            to={`/`} // event page
                                                             component={Link}
                                                             className="justify-start px-32"
                                                             color="secondary"
@@ -238,4 +241,4 @@ function Courses(props)
     );
 }
 
-export default withReducer('academyApp', reducer)(Courses);
+export default withReducer('Events', reducer)(Events);

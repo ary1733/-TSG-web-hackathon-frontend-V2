@@ -1,17 +1,17 @@
 import axios from 'axios';
 
-export const GET_UPCOMING = '[EVENTS] GET_UPCOMING';
+export const GET_CURRENT = '[EVENTS] GET_CURRENT';
 export const GET_CATEGORIES = '[EVENTS] GET CATEGORIES';
 
-export function getUpcoming()
+export function getCurrent()
 {
-    const request = axios.get('/api/events/upcoming');
+    const request = axios.get('/api/events/current');
 
     return (dispatch) =>
         request.then((response) =>{
             console.log(response);
             dispatch({
-                type   : GET_UPCOMING,
+                type   : GET_CURRENT,
                 payload: response.data.events
             })
         }
