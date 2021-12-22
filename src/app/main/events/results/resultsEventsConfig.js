@@ -1,7 +1,7 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
 
-export  const AcademyAppConfig = {
+export const resultsEventsConfig = {
     settings: {
         layout: {
             style : 'layout1', // layout-1 layout-2 layout-3
@@ -10,16 +10,12 @@ export  const AcademyAppConfig = {
     },
     routes  : [
         {
-            path     : '/events/:courseId/:courseHandle?',
+            path     : '/events/results/:courseId/:courseHandle?',
             component: React.lazy(() => import('./course/Course'))
         },
         {
-            path     : '/events',
+            path     : '/events/results',
             component: React.lazy(() => import('./courses/Courses'))
-        },
-        {
-            path     : '/apps/academy',
-            component: () => <Redirect to="/events"/>
         }
     ]
 };

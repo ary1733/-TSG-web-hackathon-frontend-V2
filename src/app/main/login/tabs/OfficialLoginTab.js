@@ -5,7 +5,7 @@ import Formsy from 'formsy-react';
 import * as authActions from 'app/auth/store/actions';
 import {useDispatch, useSelector} from 'react-redux';
 
-function JWTLoginTab(props)
+function OfficialLoginTab(props)
 {
     const dispatch = useDispatch();
     const login = useSelector(({auth}) => auth.login);
@@ -51,8 +51,8 @@ function JWTLoginTab(props)
                 <TextFieldFormsy
                     className="mb-16"
                     type="text"
-                    name="email"
-                    label="Username/Email"
+                    name="username"
+                    label="Username"
                     validations={{
                         minLength: 4
                     }}
@@ -60,7 +60,7 @@ function JWTLoginTab(props)
                         minLength: 'Min character length is 4'
                     }}
                     InputProps={{
-                        endAdornment: <InputAdornment position="end"><Icon className="text-20" color="action">email</Icon></InputAdornment>
+                        endAdornment: <InputAdornment position="end"><Icon className="text-20" color="action">person</Icon></InputAdornment>
                     }}
                     variant="outlined"
                     required
@@ -132,4 +132,4 @@ function JWTLoginTab(props)
     );
 }
 
-export default JWTLoginTab;
+export default OfficialLoginTab;

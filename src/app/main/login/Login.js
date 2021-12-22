@@ -4,7 +4,7 @@ import {darken} from '@material-ui/core/styles/colorManipulator';
 import {FuseAnimate} from '@fuse';
 import {Link} from 'react-router-dom';
 import clsx from 'clsx';
-import JWTLoginTab from './tabs/JWTLoginTab';
+import OfficialLoginTab from './tabs/OfficialLoginTab';
 import FirebaseLoginTab from './tabs/FirebaseLoginTab';
 import Auth0LoginTab from './tabs/Auth0LoginTab';
 import {makeStyles} from '@material-ui/styles';
@@ -37,14 +37,13 @@ function Login()
 
                 <FuseAnimate animation="transition.slideUpIn" delay={300}>
                     <Typography variant="h3" color="inherit" className="font-light">
-                        Welcome to the FUSE!
+                        Welcome to localhost:KGP!
                     </Typography>
                 </FuseAnimate>
 
                 <FuseAnimate delay={400}>
                     <Typography variant="subtitle1" color="inherit" className="max-w-512 mt-16">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper nisl erat, vel convallis elit fermentum pellentesque. Sed mollis velit
-                        facilisis facilisis.
+                        Your true friend in your kgp journey.
                     </Typography>
                 </FuseAnimate>
             </div>
@@ -80,7 +79,7 @@ function Login()
                             /> */}
                         </Tabs>
 
-                        {selectedTab === 0 && <JWTLoginTab/>}
+                        {selectedTab === 0 && <OfficialLoginTab/>}
                         {selectedTab === 1 && <FirebaseLoginTab/>}
                         {/* {selectedTab === 2 && <Auth0LoginTab/>} */}
 
