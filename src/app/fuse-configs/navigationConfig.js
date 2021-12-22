@@ -1,5 +1,4 @@
-import {AcademyAppConfig} from "../main/academy/AcademyAppConfig"  
-const navigationConfig = [
+  const navigationConfig = [
     {
         'id'      : 'applications',
         'title'   : 'Applications',
@@ -12,13 +11,31 @@ const navigationConfig = [
                 'type' : 'item',
                 'icon' : 'whatshot',
                 'url'  : '/example'
+            }
+        ]
+    },
+    {
+        'id'   : 'events',
+                'title': 'Events @IITKgp',
+                'type' : 'group',
+                'icon' : 'event',
+                'badge'   : {
+                    'title': 2,
+                    'bg'   : '#525E8A',
+                    'fg'   : '#FFFFFF'
+                },
+        'children': [
+            {
+                'id'   : 'upcoming-events',
+                'title': 'Upcoming Events',
+                'type' : 'item',
+                'url'  : '/events/upcoming'
             },
             {
-                'id'   : 'events',
-                'title': 'Events @IITKgp',
+                'id'   : 'Results',
+                'title': 'Results',
                 'type' : 'item',
-                'icon' : 'event',
-                'url'  : AcademyAppConfig.routes[1].path
+                'url'  : '/events/results'
             }
         ]
     }
