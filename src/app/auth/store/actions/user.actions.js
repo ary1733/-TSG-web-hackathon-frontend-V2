@@ -12,6 +12,22 @@ export const SET_USER_DATA = '[USER] SET DATA';
 export const REMOVE_USER_DATA = '[USER] REMOVE DATA';
 export const USER_LOGGED_OUT = '[USER] LOGGED OUT';
 
+
+const getRole = (user_type)=>{
+    switch (user_type) {
+        case 1:
+            return 'admin'
+        case 2:
+            return 'staff'
+        case 3:
+            return 'society'
+        case 4:
+            return 'student'
+        default:
+            break;
+    }
+}
+
 /**
  * Set user data from Auth0 token data
  */
@@ -100,9 +116,14 @@ export function setUserData(user)
         /*
         Set User Data
          */
+        
+        var role = getRole(parseInt(user.user_type));
         dispatch({
             type   : SET_USER_DATA,
-            payload: user
+            payload: {
+                ...user,
+                'role':role
+            }
         })
     }
 }

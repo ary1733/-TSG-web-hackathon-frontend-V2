@@ -16,7 +16,7 @@ class Auth extends Component {
         /**
          * Comment the line if you do not use JWt
          */
-        //this.jwtCheck();
+        this.jwtCheck();
 
         /**
          * Comment the line if you do not use Auth0
