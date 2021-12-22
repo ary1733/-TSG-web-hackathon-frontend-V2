@@ -1,9 +1,11 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Button, InputAdornment, Icon} from '@material-ui/core';
+import {Button, InputAdornment, Icon, Popover, Typography} from '@material-ui/core';
+import SendIcon from '@material-ui/icons/Send';
 import {TextFieldFormsy} from '@fuse';
 import Formsy from 'formsy-react';
 import * as authActions from 'app/auth/store/actions';
 import {useDispatch, useSelector} from 'react-redux';
+import axios from 'axios';
 
 function FirebaseLoginTab(props)
 {
@@ -12,7 +14,10 @@ function FirebaseLoginTab(props)
 
     const [isFormValid, setIsFormValid] = useState(false);
     const formRef = useRef(null);
-
+    const btnref =useRef(null)
+    const [open, setOpen] = React.useState(false)
+    const [popMessage, setpopMessage] = useState("Please send otp")
+    
     useEffect(() => {
         if ( login.error && (login.error.username || login.error.password) )
         {
@@ -37,7 +42,26 @@ function FirebaseLoginTab(props)
     {
         dispatch(authActions.submitLoginWithFireBase(model));
     }
+    function handleSendOtp(clkevt)
+    { clkevt.persist()
+        const email = formRef.current.getModel().email
+        return new Promise((resolve, reject) => {
+            axios.post('api/login/student/sendotp', {
+                email
+            }).then(response => {
+                console.log(response);
+                console.log(clkevt)
+                setpopMessage(response.data.message)
+                setOpen(true)
 
+                setTimeout(()=>{
+                    setOpen(false)
+                },5000)
+            }).catch(error => {
+                reject(error);
+            });
+        });
+    }
     return (
         <div className="w-full">
             <Formsy
@@ -48,9 +72,9 @@ function FirebaseLoginTab(props)
                 className="flex flex-col justify-center w-full"
             >
                 <TextFieldFormsy
-                    className="mb-16"
+                    className="mb-8"
                     type="text"
-                    name="username"
+                    name="email"
                     label="Email"
                     validations={{
                         minLength: 4
@@ -64,17 +88,38 @@ function FirebaseLoginTab(props)
                     variant="outlined"
                     required
                 />
-
+            <Button 
+            ref={btnref}
+            
+            className="mb-16"variant="contained" color="primary" onClick={(e)=>{handleSendOtp(e)}}>
+                Send OTP<SendIcon />
+                <Popover
+                    open={open}
+                    anchorEl={btnref.current}
+                    // anchorPosition={{ top: positionTop, left: positionLeft }}
+                    // onClose={this.handleClose}
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                      }}
+                      transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                      }}
+                >
+                    <Typography >{popMessage}</Typography>
+                </Popover>
+            </Button>
                 <TextFieldFormsy
                     className="mb-16"
                     type="password"
                     name="password"
-                    label="Password"
+                    label="OTP"
                     validations={{
-                        minLength: 4
+                        isLength: 6
                     }}
                     validationErrors={{
-                        minLength: 'Min character length is 4'
+                        isLength: 'character length is 6'
                     }}
                     InputProps={{
                         endAdornment: <InputAdornment position="end"><Icon className="text-20" color="action">vpn_key</Icon></InputAdornment>
@@ -92,9 +137,9 @@ function FirebaseLoginTab(props)
                     disabled={!isFormValid}
                     value="firebase"
                 >
-                    Log in with Firebase
+                    Log in with otp
                 </Button>
-
+                
             </Formsy>
         </div>
     );
