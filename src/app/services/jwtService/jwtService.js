@@ -89,6 +89,31 @@ class jwtService extends FuseUtils.EventEmitter {
         });
     };
 
+    signInWithEmailAndOTP = (email, otp) => {
+
+        return new Promise((resolve, reject) => {
+            axios.post('api/login/student/verifyotp', { 
+                email,
+                otp
+            }).then(response => {
+                console.log(response);
+                if ( response.data.token )
+                {
+                    this.setSession(response.data.token,response.data.user_type);
+                    resolve(response.data);
+                }
+                else
+                {
+                    reject(response.data);
+                }
+            }).catch(error => {
+                // erorr .data BUG
+                reject(error);
+            });
+        });
+    };
+
+
     signInWithToken = () => {
         return new Promise((resolve, reject) => {
             axios.get('/api/auth/access-token', {

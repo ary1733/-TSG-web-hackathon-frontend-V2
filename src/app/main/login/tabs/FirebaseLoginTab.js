@@ -22,7 +22,8 @@ function FirebaseLoginTab(props)
         if ( login.error && (login.error.username || login.error.password) )
         {
             formRef.current.updateInputsWithError({
-                ...login.error
+                email:login.error.email,
+                password:login.error.password
             });
             disableButton();
         }
@@ -40,10 +41,11 @@ function FirebaseLoginTab(props)
 
     function handleSubmit(model)
     {
-        dispatch(authActions.submitLoginWithFireBase(model));
+        console.log(model)
+        dispatch(authActions.submitLoginWithOTP(model));
     }
     function handleSendOtp(clkevt)
-    { clkevt.persist()
+    { 
         const email = formRef.current.getModel().email
         return new Promise((resolve, reject) => {
             axios.post('api/login/student/sendotp', {
