@@ -17,9 +17,12 @@ function JWTLoginTab(props)
         if ( login.error && (login.error.email || login.error.password) )
         {
             formRef.current.updateInputsWithError({
-                ...login.error
+                email:login.error.email,
+                password:login.error.password
             });
             disableButton();
+            if(login.error.message)
+                alert(login.error.message)
         }
     }, [login.error]);
 

@@ -81,7 +81,7 @@ class jwtService extends FuseUtils.EventEmitter {
                 }
                 else
                 {
-                    reject(response.data.message);
+                    reject(response.data);
                 }
             }).catch(error => {
                 reject(error);
