@@ -21,8 +21,6 @@ function JWTLoginTab(props)
                 password:login.error.password
             });
             disableButton();
-            if(login.error.message)
-                alert(login.error.message)
         }
     }, [login.error]);
 
