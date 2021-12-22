@@ -32,6 +32,12 @@
                 'url'  : '/events/upcoming'
             },
             {
+                'id'   : 'current-events',
+                'title': 'Current Events',
+                'type' : 'item',
+                'url'  : '/events/current'
+            },
+            {
                 'id'   : 'Results',
                 'title': 'Results',
                 'type' : 'item',
