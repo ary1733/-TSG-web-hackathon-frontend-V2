@@ -10,7 +10,8 @@ import reducer from '../store/reducers';
 import * as Actions from '../store/actions/event.actions';
 import {makeStyles} from '@material-ui/styles';
 import moment from 'moment';
-import jwtService from 'app/services/jwtService'
+import jwtService from 'app/services/jwtService';
+import { Button } from '@material-ui/core';
 
 // import poster from ".images/check.jpg";
 
@@ -93,20 +94,20 @@ function EventInfo(props)
                             <div className="flex justify-center p-10 pb-64 sm:pb-64 md:pb-64">  
                                 <Paper className="w-full max-w-lg rounded-8 p-16 md:p-24" elevation={1}>
                                 <div className="pb-20 "><img className="rounded-8 object-fill mx-auto" src={event.poster} /></div>
-                                    <div className='mb-5' >
-                                        <h2>Introduction</h2>
-                                        <p id="introduction" >{event.introduction}</p>
+                                    <div className='mb-5'>
+                                        <Typography className="text-xl font-semibold">Introduction</Typography>
+                                        <Typography id="introduction" >{event.introduction}</Typography>
                                     </div>
-                                    <div className='mb-5' >
-                                        <h2>Procedure</h2>
-                                        <p id="procedure" >{event.procedure}</p>
+                                    <div className='mb-5'>
+                                        <Typography className="text-xl font-semibold">Procedure</Typography>
+                                        <Typography id="procedure" >{event.procedure}</Typography>
                                     </div>
-                                    <div className='mb-5' >
-                                        <h2>Jugde criteria</h2>
-                                        <p id="jugde_criteria" >{event.jugde_criteria}</p>
+                                    <div className='mb-5'>
+                                        <Typography className="text-xl font-semibold">Jugde Criteria</Typography>
+                                        <Typography id="jugde_criteria" >{event.jugde_criteria}</Typography>
                                     </div>
-                                    <div className='mb-5' >
-                                        <h2>Timeline</h2>
+                                    <div className='mb-5'>
+                                        <Typography className="text-xl font-semibold">Timeline</Typography>
                                         <ul>
                                         {
                                             event.timeline.map((miniEvent)=>{
@@ -115,17 +116,19 @@ function EventInfo(props)
                                         }
                                         </ul>
                                     </div>
-                                    <div className='mb-5' >
-                                        <h2>Venue</h2>
-                                        <p id="venue">{event.venue}</p>
+                                    <div className='mb-5'>
+                                        <Typography className="text-xl font-semibold">Venue</Typography>
+                                        <Typography id="venue">{event.venue}</Typography>
                                     </div>
-                                    <div className='mb-5' >
-                                        <h2>Organiser</h2>
-                                        <p id="organiser">{event.organiser}</p>
+                                    <div className='mb-5'>
+                                        <Typography className="text-xl font-semibold">Organiser</Typography>
+                                        <Typography id="organiser">{event.organiser}</Typography>
                                     </div>
-                                    <div className='mb-5' >
-                                        <a id="report" href={`${event.report}?token=${jwtService.getAccessToken()}`} target='_blank'><h2>Report</h2></a>
-                                    </div>
+                                    <div>
+                                    <Button variant="contained" href={`${event.report}?token=${jwtService.getAccessToken()}`} target='_blank'>
+                                        Download Report
+                                    </Button>
+                                </div>
                                 </Paper>
                             </div>
                             </SwipeableViews>
