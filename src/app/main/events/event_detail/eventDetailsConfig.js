@@ -10,7 +10,7 @@ export const eventDetailConfig = {
     },
     routes  : [
         {
-            path     : '/events/:eventTitle',
+            path     : '/events/:event_id/:eventTitle',
             component: React.lazy(() => import('./event/event'))
         }
     ]
