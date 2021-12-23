@@ -53,7 +53,7 @@ function EventInfo(props)
         <FusePageSimple
             classes={{
                 content: "flex flex-col flex-auto overflow-hidden",
-                header : "h-100 min-h-100"
+                header : "h-100 min-h-100 fixed z-10"
             }}
             header={
                 <div className="flex flex-1 items-center px-16 lg:px-24">
@@ -137,8 +137,9 @@ function EventInfo(props)
                 event && (
                     <Stepper
                         classes={{root: "bg-transparent"}}
-                        activeStep={0}
+                        activeStep={contents.length}
                         orientation="vertical"
+                        style={{position: "fixed"}}
                     >
                         {   
                             contents.map((content)=>{

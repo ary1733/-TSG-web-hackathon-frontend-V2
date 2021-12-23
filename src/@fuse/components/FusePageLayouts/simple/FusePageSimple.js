@@ -41,7 +41,9 @@ const useStyles = makeStyles(theme => ({
         background     : 'linear-gradient(to right, ' + theme.palette.primary.dark + ' 0%, ' + theme.palette.primary.main + ' 100%)',
         color          : theme.palette.primary.contrastText,
         backgroundSize : 'cover',
-        backgroundColor: theme.palette.primary.dark
+        backgroundColor: theme.palette.primary.dark,
+        position: 'fixed',
+        width: '100%'
     },
     topBg                    : {
         position     : 'absolute',
@@ -86,7 +88,8 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center'
     },
     content                  : {
-        flex: '1 0 auto'
+        flex: '1 0 auto',
+        marginTop: '120px'
     },
     sidebarWrapper           : {
         overflow       : 'hidden',
