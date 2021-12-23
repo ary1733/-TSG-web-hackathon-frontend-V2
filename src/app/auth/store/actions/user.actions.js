@@ -184,7 +184,7 @@ export function logoutUser()
 
         const user = getState().auth.user;
 
-        if ( !user.role || user.role.length === 0 )// is guest
+        if (!user.type)// is guest
         {
             return null;
         }
