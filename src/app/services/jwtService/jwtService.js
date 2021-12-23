@@ -181,6 +181,10 @@ class jwtService extends FuseUtils.EventEmitter {
     getAccessToken = () => {
         return window.localStorage.getItem('jwt_access_token');
     };
+
+    getUserType = () => {
+        return window.localStorage.getItem('user_type');
+    }
 }
 
 const instance = new jwtService();

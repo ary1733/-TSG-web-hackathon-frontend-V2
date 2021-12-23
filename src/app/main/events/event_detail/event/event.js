@@ -10,6 +10,7 @@ import reducer from '../store/reducers';
 import * as Actions from '../store/actions/event.actions';
 import {makeStyles} from '@material-ui/styles';
 import moment from 'moment';
+import jwtService from 'app/services/jwtService'
 
 // import poster from ".images/check.jpg";
 
@@ -52,7 +53,7 @@ function EventInfo(props)
         <FusePageSimple
             classes={{
                 content: "flex flex-col flex-auto overflow-hidden",
-                header : "h-100 min-h-10"
+                header : "h-100 min-h-100"
             }}
             header={
                 <div className="flex flex-1 items-center px-16 lg:px-24">
@@ -84,22 +85,27 @@ function EventInfo(props)
                 event && (
                     <div className="flex flex-1 relative overflow-hidden">
                         <FuseScrollbars className="w-full overflow-auto">
+                        <SwipeableViews
+                                className="overflow-hidden"
+                                index={0}
+                                enableMouseEvents={true}
+                            >
                             <div className="flex justify-center p-10 pb-64 sm:pb-64 md:pb-64">  
                                 <Paper className="w-full max-w-lg rounded-8 p-16 md:p-24" elevation={1}>
-                                <div className="pb-20 "><img className="rounded-8 object-fill mx-auto" src={require("./images/check.jpg")} /></div>
-                                    <div className='mb-5' onScroll={handleScroll}>
+                                <div className="pb-20 "><img className="rounded-8 object-fill mx-auto" src={event.poster} /></div>
+                                    <div className='mb-5' >
                                         <h2>Introduction</h2>
                                         <p id="introduction" >{event.introduction}</p>
                                     </div>
-                                    <div className='mb-5' onScroll={handleScroll}>
+                                    <div className='mb-5' >
                                         <h2>Procedure</h2>
                                         <p id="procedure" >{event.procedure}</p>
                                     </div>
-                                    <div className='mb-5' onScroll={handleScroll}>
+                                    <div className='mb-5' >
                                         <h2>Jugde criteria</h2>
                                         <p id="jugde_criteria" >{event.jugde_criteria}</p>
                                     </div>
-                                    <div className='mb-5' onScroll={handleScroll}>
+                                    <div className='mb-5' >
                                         <h2>Timeline</h2>
                                         <ul>
                                         {
@@ -109,20 +115,20 @@ function EventInfo(props)
                                         }
                                         </ul>
                                     </div>
-                                    <div className='mb-5' onScroll={handleScroll}>
+                                    <div className='mb-5' >
                                         <h2>Venue</h2>
                                         <p id="venue">{event.venue}</p>
                                     </div>
-                                    <div className='mb-5' onScroll={handleScroll}>
+                                    <div className='mb-5' >
                                         <h2>Organiser</h2>
-                                        <p id="venue">{event.organiser}</p>
+                                        <p id="organiser">{event.organiser}</p>
                                     </div>
-                                    <div className='mb-5' onScroll={handleScroll}>
-                                        <h2>Report</h2>
-                                        <p id="report">{event.report}</p>
+                                    <div className='mb-5' >
+                                        <a id="report" href={`${event.report}?token=${jwtService.getAccessToken()}`} target='_blank'><h2>Report</h2></a>
                                     </div>
                                 </Paper>
                             </div>
+                            </SwipeableViews>
                         </FuseScrollbars>
                     </div>
                 )
@@ -131,7 +137,7 @@ function EventInfo(props)
                 event && (
                     <Stepper
                         classes={{root: "bg-transparent"}}
-                        activeStep={-1}
+                        activeStep={0}
                         orientation="vertical"
                     >
                         {   
