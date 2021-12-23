@@ -17,7 +17,8 @@ function StudentLoginTab(props)
     const btnref =useRef(null)
     const [open, setOpen] = React.useState(false)
     const [popMessage, setpopMessage] = useState("Please send otp")
-    
+    const [sendOtpValid, setsendOtpValid] = useState(false);
+
     useEffect(() => {
         if ( login.error && (login.error.username || login.error.password) )
         {
@@ -47,9 +48,18 @@ function StudentLoginTab(props)
     function handleSendOtp(clkevt)
     { 
         const email = formRef.current.getModel().email
+        if(email == undefined || email == "")
+        {
+            setpopMessage("Invalid mail id")
+            setOpen(true)
+            setTimeout(()=>{
+                setOpen(false)
+            },5000)
+            return
+        }
         return new Promise((resolve, reject) => {
             axios.post('api/login/student/sendotp', {
-                email
+                'email':email
             }).then(response => {
                 console.log(response);
                 console.log(clkevt)
