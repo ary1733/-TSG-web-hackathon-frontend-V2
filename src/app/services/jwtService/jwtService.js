@@ -76,12 +76,16 @@ class jwtService extends FuseUtils.EventEmitter {
                 console.log(response);
                 if ( response.data.token )
                 {
+                    console.log('login valid');
                     this.setSession(response.data.token,response.data.user_type);
+                    this.emit('onAutoLogin', true);
                     resolve(response.data);
                 }
                 else
                 {
                     reject(response.data.message);
+                    this.setSession(null);
+                    this.emit('onAutoLogout', 'credentials invalid');
                 }
             }).catch(error => {
                 reject(error);
@@ -91,20 +95,20 @@ class jwtService extends FuseUtils.EventEmitter {
 
     signInWithToken = () => {
         return new Promise((resolve, reject) => {
-            axios.get('/api/auth/access-token', {
-                data: {
-                    access_token: this.getAccessToken()
-                }
+            axios.post('api/login/user/token', {
+                token: this.getAccessToken()
             })
                 .then(response => {
+                    console.log(response);
                     if ( response.data.user )
                     {
-                        this.setSession(response.data.access_token);
                         resolve(response.data.user);
                     }
                     else
                     {
                         reject(response.data.error);
+                        this.setSession(null);
+                        this.emit('onAutoLogout', 'access-token invalid');
                     }
                 });
         });
