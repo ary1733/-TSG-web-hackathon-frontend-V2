@@ -39,8 +39,8 @@ function EventInfo(props)
          * Get the Course Data
          */
         console.log(props.location.state);
-        const {event_id, token} = props.location.state;
-        dispatch(Actions.getEventInfo(event_id, token));
+        const {event_id} = props.location.state;
+        dispatch(Actions.getEventInfo(event_id));
     }, [dispatch, props.location.state]);
 
     const handleScroll = e => {
@@ -68,7 +68,7 @@ function EventInfo(props)
                     </Hidden>
                     <IconButton
                         className="mr-16"
-                        to="/events/upcoming"
+                        to={props.location.state.prevPath}
                         component={Link}
                     >
                         <Icon>arrow_back</Icon>

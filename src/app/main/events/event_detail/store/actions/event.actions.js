@@ -3,9 +3,9 @@ import {showMessage} from 'app/store/actions/fuse';
 
 export const GET_EVENT_INFO = '[EVENTS] GET_EVENT_INFO';
 
-export function getEventInfo(event_id, token)
+export function getEventInfo(event_id)
 {
-    const request = axios.get('/api/events/'+event_id+"/info", {token: token});
+    const request = axios.get('/api/events/'+event_id+"/info");
 
     return (dispatch) =>
         request.then((response) =>
