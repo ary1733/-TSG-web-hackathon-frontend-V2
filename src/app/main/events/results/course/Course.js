@@ -32,6 +32,7 @@ function Course(props)
         /**
          * Get the Course Data
          */
+        // console.log(props);
         dispatch(Actions.getCourse(props.match.params));
     }, [dispatch, props.match.params]);
 
