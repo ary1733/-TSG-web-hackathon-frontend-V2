@@ -83,7 +83,7 @@ class jwtService extends FuseUtils.EventEmitter {
                 }
                 else
                 {
-                    reject(response.data.message);
+                    reject(response.data);
                     this.setSession(null);
                     this.emit('onAutoLogout', 'credentials invalid');
                 }
@@ -92,6 +92,35 @@ class jwtService extends FuseUtils.EventEmitter {
             });
         });
     };
+
+    signInWithEmailAndOTP = (email, otp) => {
+
+        return new Promise((resolve, reject) => {
+            axios.post('api/login/student/verifyotp', { 
+                email,
+                otp
+            }).then(response => {
+                console.log(response);
+                if ( response.data.token )
+                {
+                    this.setSession(response.data.token,response.data.user_type);
+                    resolve(response.data);
+                    this.emit('onAutoLogin', true);
+                    resolve(response.data);
+                }
+                else
+                {
+                    reject(response.data);
+                    this.setSession(null);
+                    this.emit('onAutoLogout', 'otp invalid');
+                }
+            }).catch(error => {
+                // erorr .data BUG
+                reject(error);
+            });
+        });
+    };
+
 
     signInWithToken = () => {
         return new Promise((resolve, reject) => {

@@ -1,12 +1,12 @@
 import Example from './Example';
-import LoginPage from '../login/LoginPage';
-import Login from '../login/Login';
+import { authRoles } from 'app/auth';
 export const ExampleConfig = {
     settings: {
         layout: {
             config: {}
         }
     },
+    auth    : authRoles.student, // makes the route visible only for students and above
     routes  : [
         {
             path     : '/example',
