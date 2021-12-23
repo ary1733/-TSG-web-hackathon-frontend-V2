@@ -6,7 +6,7 @@ export const ExampleConfig = {
             config: {}
         }
     },
-    auth    : authRoles.student, // makes the route visible only for students and above
+    // auth    : authRoles.student, // makes the route visible only for students and above
     routes  : [
         {
             path     : '/example',

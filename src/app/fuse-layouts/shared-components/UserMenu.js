@@ -25,22 +25,22 @@ function UserMenu(props)
             <Button className="h-64" onClick={userMenuClick}>
                 {user.data.photoURL ?
                     (
-                        <Avatar className="" alt="user photo" src={user.data.photoURL}/>
+                        <Avatar className="" alt="user photo" src={"left"}/>
                     )
                     :
                     (
                         <Avatar className="">
-                            {user.data.displayName[0]}
+                            {user.name}
                         </Avatar>
                     )
                 }
 
                 <div className="hidden md:flex flex-col ml-12 items-start">
                     <Typography component="span" className="normal-case font-600 flex">
-                        {user.data.displayName}
+                        {user.name}
                     </Typography>
                     <Typography className="text-11 capitalize" color="textSecondary">
-                        {user.role.toString()}
+                        {user.type}
                     </Typography>
                 </div>
 
@@ -63,7 +63,7 @@ function UserMenu(props)
                     paper: "py-8"
                 }}
             >
-                {!user.role || user.role.length === 0 ? (
+                {!user.type? (
                     <React.Fragment>
                         <MenuItem component={Link} to="/login">
                             <ListItemIcon className="min-w-40">
