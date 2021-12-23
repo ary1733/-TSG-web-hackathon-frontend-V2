@@ -208,7 +208,7 @@ function Events(props)
                                                     <Divider/>
                                                     <CardActions className="justify-center">
                                                         <Button
-                                                            to={`/`} // event page
+                                                            to={{ pathname: `/events/${event.title}`, state: { event_id: event.id} }} // event page
                                                             component={Link}
                                                             className="justify-start px-32"
                                                             color="secondary"
