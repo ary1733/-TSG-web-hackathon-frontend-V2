@@ -38,10 +38,10 @@ function EventInfo(props)
         /**
          * Get the Course Data
          */
-        console.log(props.location.state);
-        const {event_id} = props.location.state;
+        console.log(props.match.params);
+        const {event_id} = props.match.params;
         dispatch(Actions.getEventInfo(event_id));
-    }, [dispatch, props.location.state]);
+    }, [dispatch, props.match.params]);
 
     const handleScroll = e => {
         let element = e.target
@@ -68,7 +68,7 @@ function EventInfo(props)
                     </Hidden>
                     <IconButton
                         className="mr-16"
-                        to={props.location.state.prevPath}
+                        to={(props.location.state && props.location.state.prevPath)?props.location.state.prevPath:'/'}
                         component={Link}
                     >
                         <Icon>arrow_back</Icon>
