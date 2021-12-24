@@ -67,25 +67,36 @@ class jwtService extends FuseUtils.EventEmitter {
     signInWithUsernameAndPassword = (username, password) => {
 
         return new Promise((resolve, reject) => {
-            axios.post('api/login/official/auth/', {
-                 
-                username,
-                password
-                
-            }).then(response => {
+            const payload = {
+                username: username,
+                password: password
+            };
+            const requestOptions = {
+                crossDomain: true,
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            };
+            fetch('api/login/official/auth/', requestOptions).
+            then(async (response) => {
+                let data = await response.json()
+                if (response.status != 200){
+                    reject(data);
+                    this.setSession(null);
+                    this.emit('onAutoLogout', data.message);
+                }
+                return data;
+            }).
+            then(response => {
                 console.log(response);
-                if ( response.data.token )
+                if (response.token)
                 {
                     console.log('login valid');
-                    this.setSession(response.data.token,response.data.user_type);
+                    this.setSession(response.token,response.user_type);
                     this.emit('onAutoLogin', true);
-                    resolve(response.data);
-                }
-                else
-                {
-                    reject(response.data);
-                    this.setSession(null);
-                    this.emit('onAutoLogout', 'credentials invalid');
+                    resolve(response);
                 }
             }).catch(error => {
                 reject(error);
@@ -96,26 +107,38 @@ class jwtService extends FuseUtils.EventEmitter {
     signInWithEmailAndOTP = (email, otp) => {
 
         return new Promise((resolve, reject) => {
-            axios.post('api/login/student/verifyotp', { 
+            const payload = {
                 email: email,
                 otp: otp
-            }).then(response => {
-                console.log(response);
-                if ( response.data.token )
-                {
-                    this.setSession(response.data.token,response.data.user_type);
-                    resolve(response.data);
-                    this.emit('onAutoLogin', true);
-                    resolve(response.data);
-                }
-                else
-                {
-                    reject(response.data);
+            };
+            const requestOptions = {
+                crossDomain: true,
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            };
+            fetch('api/login/student/verifyotp', requestOptions).
+            then(async (response) => {
+                let data = await response.json()
+                if (response.status != 200){
+                    reject(data);
                     this.setSession(null);
-                    this.emit('onAutoLogout', 'otp invalid');
+                    this.emit('onAutoLogout', data.message);
+                }
+                return data;
+            }).
+            then(response => {
+                console.log(response);
+                if (response.token)
+                {
+                    console.log('login valid');
+                    this.setSession(response.token,response.user_type);
+                    this.emit('onAutoLogin', true);
+                    resolve(response);
                 }
             }).catch(error => {
-                // erorr .data BUG
                 reject(error);
             });
         });
@@ -124,22 +147,36 @@ class jwtService extends FuseUtils.EventEmitter {
 
     signInWithToken = () => {
         return new Promise((resolve, reject) => {
-            axios.post('api/login/user/token', {
+            const payload = {
                 token: this.getAccessToken()
-            })
-                .then(response => {
-                    console.log(response);
-                    if ( response.data.user )
-                    {
-                        resolve(response.data.user);
-                    }
-                    else
-                    {
-                        reject(response.data.error);
-                        this.setSession(null);
-                        this.emit('onAutoLogout', 'access-token invalid');
-                    }
-                });
+            };
+            const requestOptions = {
+                crossDomain: true,
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            };
+            fetch('api/login/user/token', requestOptions).
+            then(async (response) => {
+                let data = await response.json()
+                if (response.status != 200){
+                    reject(data);
+                    this.setSession(null);
+                    this.emit('onAutoLogout', data.message);
+                }
+                return data;
+            }).
+            then(response => {
+                console.log(response);
+                if (response.user)
+                {
+                    resolve(response.user);
+                }
+            }).catch(error => {
+                reject(error);
+            });
         });
     };
 
