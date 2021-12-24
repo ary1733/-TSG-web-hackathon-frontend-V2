@@ -9,7 +9,7 @@ export const eventDetailConfig = {
             config: {} // checkout layout configs at app/fuse-configs/layout-1/Layout1Config.js
         }
     },
-    auth    : authRoles.student,
+    auth    : authRoles.loggedIn,
     routes  : [
         {
             path     : '/events/:event_id/:eventTitle',
