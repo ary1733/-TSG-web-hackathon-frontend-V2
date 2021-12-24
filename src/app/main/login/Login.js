@@ -63,12 +63,12 @@ function Login()
                             className="mb-32"
                         >
                             <Tab
-                                icon={<img className="h-40 p-4 bg-black rounded-12" src="assets/images/logos/jwt.svg" alt="firebase"/>}
+                                icon={<img className="h-40 p-4 bg-white rounded-12" src="assets/images/logos/official.svg" alt="firebase"/>}
                                 className="min-w-0"
                                 label="Official"
                             />
                             <Tab
-                                icon={<img className="h-40" src="assets/images/logos/firebase.svg" alt="firebase"/>}
+                                icon={<img className="h-40" src="assets/images/logos/student.svg" alt="firebase"/>}
                                 className="min-w-0"
                                 label="Student"
                             />
