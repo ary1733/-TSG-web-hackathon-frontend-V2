@@ -2,8 +2,8 @@
     {
         'id'   : 'profile',
                 'title': 'Profile',
-                'type' : 'group',
-                'icon' : 'account',
+                'type' : 'collapse',
+                'icon' : 'account_circle',
                 'badge'   : {
                     'title': 1,
                     'bg'   : '#525E8A',
@@ -21,8 +21,8 @@
     {
         'id'   : 'events',
                 'title': 'Events @IITKgp',
-                'type' : 'group',
-                'icon' : 'event',
+                'type' : 'collapse',
+                'icon' : 'event_emoji',
                 'badge'   : {
                     'title': 2,
                     'bg'   : '#525E8A',
