@@ -44,10 +44,12 @@ function EventInfo(props)
     }, [dispatch, props.location.state]);
 
     const handleScroll = e => {
-        let element = e.target
-        if (element.scrollHeight - element.scrollTop >= element.clientHeight) {
-          activeStep += 1;
-        }
+        // let element = e.target
+        // if (element.scrollHeight - element.scrollTop >= element.clientHeight) {
+        //   activeStep += 1;
+        // }
+        console.log(pageLayout)
+        document.getElementById(e).scrollIntoView()
       }
 
     return (
@@ -93,20 +95,22 @@ function EventInfo(props)
                             >
                             <div className="flex justify-center p-10 pb-64 sm:pb-64 md:pb-64">  
                                 <Paper className="w-full max-w-lg rounded-8 p-16 md:p-24" elevation={1}>
-                                <div className="pb-20 "><img className="rounded-8 object-fill mx-auto" src={event.poster} /></div>
-                                    <div className='mb-5'>
+                                    <div className="pb-20 " id = {`listItemId_${contents[0]}`}>
+                                        <img className="rounded-8 object-fill mx-auto" src={event.poster}/>
+                                    </div>
+                                    <div className='mb-5' id = {`listItemId_${contents[1]}`}>
                                         <Typography className="text-xl font-semibold">Introduction</Typography>
                                         <Typography id="introduction" >{event.introduction}</Typography>
                                     </div>
-                                    <div className='mb-5'>
+                                    <div className='mb-5' id = {`listItemId_${contents[2]}`}>
                                         <Typography className="text-xl font-semibold">Procedure</Typography>
                                         <Typography id="procedure" >{event.procedure}</Typography>
                                     </div>
-                                    <div className='mb-5'>
+                                    <div className='mb-5' id = {`listItemId_${contents[3]}`}>
                                         <Typography className="text-xl font-semibold">Jugde Criteria</Typography>
                                         <Typography id="jugde_criteria" >{event.jugde_criteria}</Typography>
                                     </div>
-                                    <div className='mb-5'>
+                                    <div className='mb-5' id = {`listItemId_${contents[4]}`}>
                                         <Typography className="text-xl font-semibold">Timeline</Typography>
                                         <ul>
                                         {
@@ -116,19 +120,19 @@ function EventInfo(props)
                                         }
                                         </ul>
                                     </div>
-                                    <div className='mb-5'>
+                                    <div className='mb-5' id = {`listItemId_${contents[5]}`}>
                                         <Typography className="text-xl font-semibold">Venue</Typography>
                                         <Typography id="venue">{event.venue}</Typography>
                                     </div>
-                                    <div className='mb-5'>
+                                    <div className='mb-5' id = {`listItemId_${contents[6]}`}>
                                         <Typography className="text-xl font-semibold">Organiser</Typography>
                                         <Typography id="organiser">{event.organiser}</Typography>
                                     </div>
-                                    <div>
+                                    <div id = {`listItemId_${contents[7]}`}>
                                     <Button variant="contained" href={`${event.report}?token=${jwtService.getAccessToken()}`} target='_blank'>
                                         Download Report
                                     </Button>
-                                </div>
+                                    </div>
                                 </Paper>
                             </div>
                             </SwipeableViews>
@@ -147,9 +151,10 @@ function EventInfo(props)
                         {   
                             contents.map((content)=>{
                                 return <Step key={content}>
-                                            <StepLabel classes={{root: classes.stepLabel}}>{content.split('_').join(' ').toUpperCase()}</StepLabel>
+                                            <StepLabel onClick={()=>handleScroll(`listItemId_${content}`)} classes={{root: classes.stepLabel}}>{content.split('_').join(' ').toUpperCase()}</StepLabel>
                                         </Step>
                                 })
+                                // document.getElementById(listItemId_${content}).scrollIntoView()
                         }
                     </Stepper>
                 )

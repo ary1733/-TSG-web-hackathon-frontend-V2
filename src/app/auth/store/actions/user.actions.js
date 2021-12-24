@@ -145,7 +145,7 @@ export function setUserData(user)
          */
         
         const role = getRole(parseInt(user.user_type));
-        getDataFromToken(localStorage.getItem('jwt_access_token')).then(
+        getDataFromToken(jwtService.getAccessToken()).then(
             (data)=>{
                 dispatch({
                     type   : SET_USER_DATA,
