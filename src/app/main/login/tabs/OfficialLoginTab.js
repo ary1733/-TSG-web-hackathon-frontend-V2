@@ -88,7 +88,7 @@ function OfficialLoginTab(props)
                     type="submit"
                     variant="contained"
                     color="primary"
-                    className="w-full mx-auto mt-16 normal-case"
+                    className="w-full mx-auto normal-case"
                     aria-label="LOG IN"
                     disabled={!isFormValid}
                     value="legacy"

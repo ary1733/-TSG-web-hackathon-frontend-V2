@@ -3,9 +3,12 @@
  */
 const authRoles = {
     admin    : ['admin'],
-    staff    : ['admin', 'staff'],
-    society  : ['admin', 'staff', 'society'],
-    student  : ['admin', 'staff', 'society', 'student'],
+    staff    : ['staff'],
+    society  : ['society'],
+    student  : ['student'],
+    loggedIn : ['admin', 'staff', 'society', 'student'],
+    officials: ['admin', 'staff'],
+    organisers: ['admin', 'staff', 'society'],
     onlyGuest: []
 };
 /*
