@@ -37,10 +37,10 @@ function UserMenu(props)
 
                 <div className="hidden md:flex flex-col ml-12 items-start">
                     <Typography component="span" className="normal-case font-600 flex">
-                        {user.name}
+                        {user.name?user.name:'Guest'}
                     </Typography>
                     <Typography className="text-11 capitalize" color="textSecondary">
-                        {user.type}
+                        {user.role?user.role.toString():'Guest'}
                     </Typography>
                 </div>
 
@@ -71,12 +71,12 @@ function UserMenu(props)
                             </ListItemIcon>
                             <ListItemText className="pl-0" primary="Login"/>
                         </MenuItem>
-                        <MenuItem component={Link} to="/register">
+                        {/* <MenuItem component={Link} to="/register">
                             <ListItemIcon className="min-w-40">
                                 <Icon>person_add</Icon>
                             </ListItemIcon>
                             <ListItemText className="pl-0" primary="Register"/>
-                        </MenuItem>
+                        </MenuItem> */}
                     </React.Fragment>
                 ) : (
                     <React.Fragment>
@@ -86,12 +86,12 @@ function UserMenu(props)
                             </ListItemIcon>
                             <ListItemText className="pl-0" primary="My Profile"/>
                         </MenuItem>
-                        <MenuItem component={Link} to="/apps/mail" onClick={userMenuClose}>
+                        {/* <MenuItem component={Link} to="/apps/mail" onClick={userMenuClose}>
                             <ListItemIcon className="min-w-40">
                                 <Icon>mail</Icon>
                             </ListItemIcon>
                             <ListItemText className="pl-0" primary="Inbox"/>
-                        </MenuItem>
+                        </MenuItem> */}
                         <MenuItem
                             onClick={() => {
                                 dispatch(authActions.logoutUser());

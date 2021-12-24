@@ -111,13 +111,13 @@ export function setUserData(user)
         /*
         Set User Settings
          */
-        dispatch(setDefaultSettings(user.user_type));
+        dispatch(setDefaultSettings(user.type));
 
         /*
         Set User Data
          */
         
-        var role = getRole(parseInt(user.user_type));
+        let role = getRole(parseInt(user.type));
         dispatch({
             type   : SET_USER_DATA,
             payload: {

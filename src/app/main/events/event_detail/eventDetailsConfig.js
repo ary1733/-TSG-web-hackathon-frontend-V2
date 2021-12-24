@@ -1,5 +1,6 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
+import {authRoles} from 'app/auth';
 
 export const eventDetailConfig = {
     settings: {
@@ -8,6 +9,7 @@ export const eventDetailConfig = {
             config: {} // checkout layout configs at app/fuse-configs/layout-1/Layout1Config.js
         }
     },
+    auth    : authRoles.student,
     routes  : [
         {
             path     : '/events/:event_id/:eventTitle',

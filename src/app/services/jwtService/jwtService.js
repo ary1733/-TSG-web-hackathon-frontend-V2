@@ -97,8 +97,8 @@ class jwtService extends FuseUtils.EventEmitter {
 
         return new Promise((resolve, reject) => {
             axios.post('api/login/student/verifyotp', { 
-                email,
-                otp
+                email: email,
+                otp: otp
             }).then(response => {
                 console.log(response);
                 if ( response.data.token )

@@ -7,7 +7,6 @@ import { LoginConfig } from 'app/main/login/LoginConfig';
 import { EventsConfig } from 'app/main/events/EventsConfig';
 
 const routeConfigs = [
-    ExampleConfig,
     LoginConfig,
     ...EventsConfig
 ];
@@ -17,7 +16,7 @@ const routes = [
     {
         path     : '/', 
         exact:true,
-        component: () => <Redirect to="/example"/>
+        component: () => <Redirect to="/events/upcoming"/>
     }
    
 ];
