@@ -8,7 +8,7 @@ import FooterLayout1 from './components/FooterLayout1';
 import LeftSideLayout1 from './components/LeftSideLayout1';
 import RightSideLayout1 from './components/RightSideLayout1';
 import NavbarWrapperLayout1 from './components/NavbarWrapperLayout1';
-import SettingsPanel from 'app/fuse-layouts/shared-components/SettingsPanel';
+// import SettingsPanel from 'app/fuse-layouts/shared-components/SettingsPanel';
 import clsx from 'clsx';
 import AppContext from 'app/AppContext';
 
@@ -138,7 +138,7 @@ function Layout1(props)
                                         <FooterLayout1/>
                                     )}
 
-                                    <SettingsPanel/>
+                                    {/* <SettingsPanel/> */}
 
                                 </div>
 
@@ -216,7 +216,7 @@ function Layout1(props)
                                     <FooterLayout1/>
                                 )}
 
-                                <SettingsPanel/>
+                                {/* <SettingsPanel/> */}
 
                             </div>
 

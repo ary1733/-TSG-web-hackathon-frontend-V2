@@ -1,9 +1,9 @@
 import React from 'react';
 import {AppBar, Hidden, Toolbar} from '@material-ui/core';
 import {makeStyles, ThemeProvider} from '@material-ui/styles';
-import {FuseSearch, FuseShortcuts} from '@fuse';
+import {FuseSearch} from '@fuse';
 import NavbarMobileToggleButton from 'app/fuse-layouts/shared-components/NavbarMobileToggleButton';
-import QuickPanelToggleButton from 'app/fuse-layouts/shared-components/quickPanel/QuickPanelToggleButton';
+// import QuickPanelToggleButton from 'app/fuse-layouts/shared-components/quickPanel/QuickPanelToggleButton';
 import UserMenu from 'app/fuse-layouts/shared-components/UserMenu';
 import {useSelector} from 'react-redux';
 
@@ -35,9 +35,9 @@ function ToolbarLayout1(props)
                     )}
 
                     <div className="flex flex-1">
-                        <Hidden mdDown>
+                        {/* <Hidden mdDown>
                             <FuseShortcuts className="px-16"/>
-                        </Hidden>
+                        </Hidden> */}
                     </div>
 
                     <div className="flex">
@@ -56,7 +56,7 @@ function ToolbarLayout1(props)
 
                         <div className={classes.separator}/>
 
-                        <QuickPanelToggleButton/>
+                        {/* <QuickPanelToggleButton/> */}
                     </div>
 
                     {config.navbar.display && config.navbar.position === 'right' && (
