@@ -16,7 +16,7 @@ class Auth extends Component {
         /**
          * Comment the line if you do not use JWt
          */
-        // this.jwtCheck();
+        this.jwtCheck();
 
         /**
          * Comment the line if you do not use Auth0
@@ -31,7 +31,7 @@ class Auth extends Component {
 
     jwtCheck = () => {
         jwtService.on('onAutoLogin', () => {
-
+            console.log("onAuto login called");
             this.props.showMessage({message: 'Logging in with JWT'});
 
             /**
