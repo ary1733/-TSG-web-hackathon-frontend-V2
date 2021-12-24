@@ -1,5 +1,24 @@
   const navigationConfig = [
     {
+        'id'   : 'profile',
+                'title': 'Profile',
+                'type' : 'group',
+                'icon' : 'account',
+                'badge'   : {
+                    'title': 1,
+                    'bg'   : '#525E8A',
+                    'fg'   : '#FFFFFF'
+                },
+        'children': [
+                    {
+                        'id'   : 'achievements',
+                        'title': 'Achievements',
+                        'type' : 'item',
+                        'url'  : '/profile/achievements'
+                    }
+        ]
+    },
+    {
         'id'   : 'events',
                 'title': 'Events @IITKgp',
                 'type' : 'group',

@@ -5,10 +5,12 @@ import {ExampleConfig} from 'app/main/example/ExampleConfig';
 import LoginPage from 'app/main/login/LoginPage';
 import { LoginConfig } from 'app/main/login/LoginConfig';
 import { EventsConfig } from 'app/main/events/EventsConfig';
+import { profileConfig} from 'app/main/profile/profleConfig';
 
 const routeConfigs = [
     LoginConfig,
-    ...EventsConfig
+    ...EventsConfig,
+    ...profileConfig
 ];
 
 const routes = [
