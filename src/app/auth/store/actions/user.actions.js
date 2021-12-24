@@ -7,6 +7,7 @@ import firebase from 'firebase/app';
 import firebaseService from 'app/services/firebaseService';
 import auth0Service from 'app/services/auth0Service';
 import jwtService from 'app/services/jwtService';
+import axios from 'axios'
 
 export const SET_USER_DATA = '[USER] SET DATA';
 export const REMOVE_USER_DATA = '[USER] REMOVE DATA';
@@ -26,6 +27,32 @@ const getRole = (user_type)=>{
         default:
             break;
     }
+}
+
+const getDataFromToken = (token)=>{
+    return new Promise((resolve, reject) => {
+        axios.post('api/login/user/token/', {
+            token 
+        }).then(response => {
+            console.log(response);
+            if ( response.data.user )
+            {
+                const data = {
+                    displayName: response.data.user.name,
+                    email:      response.data.user.email,
+                    roll:       response.data.user.roll
+                }
+                resolve(data);
+            }
+            else
+            {
+                reject(response);
+            }
+        }).catch(error => {
+            console.log(error)
+            reject(error);
+        });
+    });
 }
 
 /**
@@ -117,14 +144,24 @@ export function setUserData(user)
         Set User Data
          */
         
-        var role = getRole(parseInt(user.user_type));
-        dispatch({
-            type   : SET_USER_DATA,
-            payload: {
-                ...user,
-                'role':role
+        const role = getRole(parseInt(user.user_type));
+        getDataFromToken(localStorage.getItem('jwt_access_token')).then(
+            (data)=>{
+                dispatch({
+                    type   : SET_USER_DATA,
+                    payload: {
+                        ...user,
+                        role:role,
+                        data:data
+                    }
+                })
             }
-        })
+        ).catch(
+            (error)=>{
+                console.log(error)
+            }
+        )
+        
     }
 }
 

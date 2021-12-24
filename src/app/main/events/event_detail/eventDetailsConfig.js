@@ -11,7 +11,7 @@ export const eventDetailConfig = {
     routes  : [
         {
             path     : '/events/:eventTitle',
-            component: React.lazy(() => import('./event/Event'))
+            component: React.lazy(() => import('./event/event'))
         }
     ]
 };
