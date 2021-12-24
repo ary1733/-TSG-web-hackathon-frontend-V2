@@ -84,7 +84,7 @@ function StudentLoginTab(props)
                 className="flex flex-col justify-center w-full"
             >
                 <TextFieldFormsy
-                    className="mb-8"
+                    className="mb-2"
                     type="text"
                     name="email"
                     label="Email"
@@ -103,8 +103,8 @@ function StudentLoginTab(props)
             <Button 
             ref={btnref}
             
-            className="mb-16"variant="contained" color="primary" onClick={(e)=>{handleSendOtp(e)}}>
-                Send OTP<SendIcon />
+            className="w-full mx-auto normal-case mb-16" variant="contained" color="primary" onClick={(e)=>{handleSendOtp(e)}}>
+                Send OTP<SendIcon/>
                 <Popover
                     open={open}
                     anchorEl={btnref.current}
@@ -123,7 +123,7 @@ function StudentLoginTab(props)
                 </Popover>
             </Button>
                 <TextFieldFormsy
-                    className="mb-16"
+                    className="mt-16 mb-2"
                     type="password"
                     name="password"
                     label="OTP"
@@ -144,12 +144,12 @@ function StudentLoginTab(props)
                     type="submit"
                     variant="contained"
                     color="primary"
-                    className="w-full mx-auto normal-case mt-16"
+                    className="w-full mx-auto normal-case"
                     aria-label="LOG IN"
                     disabled={!isFormValid}
                     value="firebase"
                 >
-                    Log in with otp
+                    Login
                 </Button>
                 
             </Formsy>
