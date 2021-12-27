@@ -6,7 +6,7 @@ export const GET_CATEGORIES = '[ACHIEVEMENTS] GET_CATEGORIES';
 
 export function getAchievements()
 {
-    const request = axios.get('/api/achievement/student/getAchievements', {params:{token: jwtService.getAccessToken()}});
+    const request = axios.get('/api/achievement/student/getAchievements', {withCredentials: true});
 
     return (dispatch) =>
         request.then((response) =>{
