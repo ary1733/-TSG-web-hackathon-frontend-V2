@@ -1,4 +1,5 @@
-  const navigationConfig = [
+ import { authRoles } from "app/auth";
+ const navigationConfig = [
     {
         'id'   : 'profile',
                 'title': 'Profile',
@@ -14,7 +15,8 @@
                         'id'   : 'achievements',
                         'title': 'Achievements',
                         'type' : 'item',
-                        'url'  : '/profile/achievements'
+                        'url'  : '/profile/achievements',
+                        'auth' : authRoles.student
                     }
         ]
     },
