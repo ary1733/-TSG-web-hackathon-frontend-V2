@@ -7,7 +7,6 @@ class jwtService extends FuseUtils.EventEmitter {
     init()
     {
         this.setInterceptors();
-        this.handleAuthentication();
     }
 
     setInterceptors = () => {
@@ -77,27 +76,26 @@ class jwtService extends FuseUtils.EventEmitter {
                 headers: {
                 'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(payload)
+                body: JSON.stringify(payload),
+                credentials: 'include'
             };
             fetch('api/login/official/auth/', requestOptions).
             then(async (response) => {
                 let data = await response.json()
                 if (response.status != 200){
-                    reject(data);
+                    reject(data.message);
                     this.setSession(null);
                     this.emit('onAutoLogout', data.message);
+                }else{
+                    console.log('login valid');
+                    this.setSession(response.user_type);
+                    this.emit('onAutoLogin', true);
+                    resolve(response);
                 }
                 return data;
             }).
             then(response => {
                 console.log(response);
-                if (response.token)
-                {
-                    console.log('login valid');
-                    this.setSession(response.token,response.user_type);
-                    this.emit('onAutoLogin', true);
-                    resolve(response);
-                }
             }).catch(error => {
                 reject(error);
             });
@@ -117,27 +115,26 @@ class jwtService extends FuseUtils.EventEmitter {
                 headers: {
                 'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(payload)
+                body: JSON.stringify(payload),
+                credentials: 'include'
             };
             fetch('api/login/student/verifyotp', requestOptions).
             then(async (response) => {
                 let data = await response.json()
                 if (response.status != 200){
-                    reject(data);
+                    reject(data.message);
                     this.setSession(null);
                     this.emit('onAutoLogout', data.message);
+                }else{
+                    console.log('login valid');
+                    this.setSession(response.user_type);
+                    this.emit('onAutoLogin', true);
+                    resolve(response);
                 }
                 return data;
             }).
             then(response => {
                 console.log(response);
-                if (response.token)
-                {
-                    console.log('login valid');
-                    this.setSession(response.token,response.user_type);
-                    this.emit('onAutoLogin', true);
-                    resolve(response);
-                }
             }).catch(error => {
                 reject(error);
             });
@@ -147,24 +144,21 @@ class jwtService extends FuseUtils.EventEmitter {
 
     signInWithToken = () => {
         return new Promise((resolve, reject) => {
-            const payload = {
-                token: this.getAccessToken()
-            };
             const requestOptions = {
                 crossDomain: true,
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(payload)
+                credentials: 'include'
             };
             fetch('api/login/user/token', requestOptions).
             then(async (response) => {
                 let data = await response.json()
                 if (response.status != 200){
-                    reject(data);
-                    this.setSession(null);
-                    this.emit('onAutoLogout', data.message);
+                    reject(data.message);
+                    // this.setSession(null);
+                    // this.emit('onAutoLogout', data.message);
                 }
                 return data;
             }).
@@ -172,6 +166,7 @@ class jwtService extends FuseUtils.EventEmitter {
                 console.log(response);
                 if (response.user)
                 {
+                    console.log("user set");
                     resolve(response.user);
                 }
             }).catch(error => {
@@ -186,23 +181,29 @@ class jwtService extends FuseUtils.EventEmitter {
         });
     };
 
-    setSession = (access_token,user_type) => {
-        if ( access_token )
+    setSession = (user_type) => {
+        if ( user_type )
         {
-            localStorage.setItem('jwt_access_token', access_token);
+            // localStorage.setItem('jwt_access_token', access_token);
             localStorage.setItem('user_type', user_type);
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + access_token;
+            // axios.defaults.headers.common['Authorization'] = 'Bearer ' + access_token;
         }
         else
         {
-            localStorage.removeItem('jwt_access_token');
+            // localStorage.removeItem('jwt_access_token');
             localStorage.removeItem('user_type');
-            delete axios.defaults.headers.common['Authorization'];
+            // delete axios.defaults.headers.common['Authorization'];
         }
     };
 
     logout = () => {
         this.setSession(null);
+        const requestOptions = {
+            crossDomain: true,
+            method: 'POST',
+            credentials: 'include'
+        };
+        fetch('api/login/user/logout', requestOptions)
     };
 
     isAuthTokenValid = access_token => {

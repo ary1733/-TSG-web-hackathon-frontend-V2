@@ -28,24 +28,30 @@ class Auth extends Component {
          */
         //this.firebaseCheck();
     }
+    signWithToken = () => {
+        jwtService.signInWithToken()
+        .then(user => {
+            this.props.setUserData(user);
+            console.log(user);
+            this.props.showMessage({message: 'Logged in with JWT'});
+        })
+        .catch(error => {
+            this.props.showMessage({message: error});
+        })
+    }
 
-    jwtCheck = () => {
+    jwtCheck = () => {                    
+        this.signWithToken();
+        
         jwtService.on('onAutoLogin', () => {
             console.log("onAuto login called");
             this.props.showMessage({message: 'Logging in with JWT'});
 
             /**
              * Sign in and retrieve user data from Api
-             */
-            jwtService.signInWithToken()
-                .then(user => {
-                    this.props.setUserData(user);
-                    console.log(user);
-                    this.props.showMessage({message: 'Logged in with JWT'});
-                })
-                .catch(error => {
-                    this.props.showMessage({message: error});
-                })
+             */             
+            this.signWithToken();
+
         });
 
         jwtService.on('onAutoLogout', (message) => {
