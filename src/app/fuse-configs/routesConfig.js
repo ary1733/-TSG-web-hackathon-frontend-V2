@@ -19,6 +19,11 @@ const routes = [
         path     : '/', 
         exact:true,
         component: () => <Redirect to="/events/upcoming"/>
+    },
+    {
+        path     : '/profile', 
+        exact:true,
+        component: () => <Redirect to="/profile/achievements"/>
     }
    
 ];
