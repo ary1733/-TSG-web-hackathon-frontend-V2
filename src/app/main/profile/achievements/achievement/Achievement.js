@@ -203,7 +203,7 @@ function Achievements(props) {
                                                             className="justify-start px-32"
                                                             color="secondary"
                                                         >
-                                                           <a href={`${achievement.certificate}?token=${jwtService.getAccessToken()}`} target='_blank'>
+                                                           <a href={achievement.certificate} target='_blank'>
                                                                 Certificate
                                                             </a>
                                                         </Button>)
