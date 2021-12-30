@@ -125,7 +125,7 @@ function EventInfo(props)
                                         <Typography id="organiser">{event.organiser}</Typography>
                                     </div>
                                     <div>
-                                    <Button variant="contained" href={`${event.report}?token=${jwtService.getAccessToken()}`} target='_blank'>
+                                    <Button variant="contained" href={event.report} target='_blank'>
                                         Download Report
                                     </Button>
                                 </div>
