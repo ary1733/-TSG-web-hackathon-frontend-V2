@@ -6,7 +6,7 @@ class jwtService extends FuseUtils.EventEmitter {
 
     init()
     {
-        this.setInterceptors();
+        // this.setInterceptors();
     }
 
     setInterceptors = () => {
