@@ -22,6 +22,7 @@ export {default as FuseChipSelect} from './components/FuseChipSelect/FuseChipSel
 export {default as FuseSuspense} from './components/FuseSuspense/FuseSuspense';
 export {default as FuseLoading} from './components/FuseLoading/FuseLoading';
 export {default as FuseSidePanel} from './components/FuseSidePanel/FuseSidePanel';
+export {default as OutlinedDiv} from './components/OutlinedDiv/OutlinedDiv';
 export {default as FuseUtils} from './FuseUtils';
 export * from './FuseDefaultSettings';
 export * from './components/formsy/index';

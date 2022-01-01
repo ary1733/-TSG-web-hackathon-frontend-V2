@@ -17,6 +17,21 @@
                         'type' : 'item',
                         'url'  : '/profile/achievements',
                         'auth' : authRoles.student
+                    },
+                    {
+                        'id'   : 'complaints',
+                        'title': 'complaints',
+                        'type' : 'collapse',
+                        'auth' : authRoles.student,
+                        'children': [
+                            {
+                                'id'   : 'add-complaints',
+                                'title': 'New Complaint',
+                                'type' : 'item',
+                                'url'  : '/profile/complaints/new',
+                                'auth' : authRoles.loggedIn
+                            }
+                        ]
                     }
         ]
     },

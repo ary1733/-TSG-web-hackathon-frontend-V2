@@ -47,8 +47,8 @@ const useStyles = makeStyles(theme => ({
 
 function Achievements(props) {
     const dispatch = useDispatch();
-    const achievements = useSelector(({ achievements }) => achievements.achievement.data);
-    const categories = useSelector(({ achievements }) => achievements.achievement.categories);
+    const achievements = useSelector(({ user }) => user.achievement.data);
+    const categories = useSelector(({ user }) => user.achievement.categories);
     const user = useSelector(({ auth }) => auth.user);
 
     const classes = useStyles(props)
@@ -243,4 +243,4 @@ function Achievements(props) {
     );
 }
 
-export default withReducer('achievements', reducer)(Achievements);
+export default withReducer('user', reducer)(Achievements);
