@@ -50,6 +50,10 @@ function EventInfo(props)
         }
       }
 
+    const headingClasses = "text-3xl font-bold text-indigo-darker";
+    const pClasses = "text-xl mb-10 font-semibold text-black";
+    const listElementsClasses = "text-xl mb-2 font-semibold text-black";
+
     return (
         <FusePageSimple
             classes={{
@@ -95,37 +99,37 @@ function EventInfo(props)
                                 <Paper className="w-full max-w-lg rounded-8 p-16 md:p-24" elevation={1}>
                                 <div className="pb-20 "><img className="rounded-8 object-fill mx-auto" src={event.poster} /></div>
                                     <div className='mb-5'>
-                                        <Typography className="text-xl font-semibold">Introduction</Typography>
-                                        <Typography id="introduction" >{event.introduction}</Typography>
+                                        <Typography className={headingClasses}>Introduction</Typography>
+                                        <Typography className={pClasses} id="introduction" >{event.introduction}</Typography>
                                     </div>
                                     <div className='mb-5'>
-                                        <Typography className="text-xl font-semibold">Procedure</Typography>
-                                        <Typography id="procedure" >{event.procedure}</Typography>
+                                        <Typography className={headingClasses}>Procedure</Typography>
+                                        <Typography className={pClasses} id="procedure" >{event.procedure}</Typography>
                                     </div>
                                     <div className='mb-5'>
-                                        <Typography className="text-xl font-semibold">Jugde Criteria</Typography>
-                                        <Typography id="jugde_criteria" >{event.jugde_criteria}</Typography>
+                                        <Typography className={headingClasses}>Jugde Criteria</Typography>
+                                        <Typography className={pClasses} id="jugde_criteria" >{event.jugde_criteria}</Typography>
                                     </div>
                                     <div className='mb-5'>
-                                        <Typography className="text-xl font-semibold">Timeline</Typography>
+                                        <Typography className={headingClasses}>Timeline</Typography>
                                         <ul>
                                         {
                                             event.timeline.map((miniEvent)=>{
-                                                return <li key={miniEvent}>{miniEvent}</li>
+                                                return <li className={listElementsClasses} key={miniEvent}>{miniEvent}</li>
                                             })
                                         }
                                         </ul>
                                     </div>
                                     <div className='mb-5'>
-                                        <Typography className="text-xl font-semibold">Venue</Typography>
-                                        <Typography id="venue">{event.venue}</Typography>
+                                        <Typography className={headingClasses}>Venue</Typography>
+                                        <Typography className={pClasses} id="venue">{event.venue}</Typography>
                                     </div>
                                     <div className='mb-5'>
-                                        <Typography className="text-xl font-semibold">Organiser</Typography>
-                                        <Typography id="organiser">{event.organiser}</Typography>
+                                        <Typography className={headingClasses}>Organiser</Typography>
+                                        <Typography className={pClasses} id="organiser">{event.organiser}</Typography>
                                     </div>
-                                    <div>
-                                    <Button variant="contained" href={event.report} target='_blank'>
+                                    <div className='relative -bottom-20'>
+                                    <Button variant="contained" href={event.report} target='_blank' className='bg-indigo-darker hover:bg-indigo text-white text-lg mt-20 absolute right-0 bottom-0' >
                                         Download Report
                                     </Button>
                                 </div>
