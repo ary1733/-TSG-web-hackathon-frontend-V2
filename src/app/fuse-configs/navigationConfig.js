@@ -20,7 +20,7 @@
                     },
                     {
                         'id'   : 'complaints',
-                        'title': 'complaints',
+                        'title': 'Complaints',
                         'type' : 'collapse',
                         'auth' : authRoles.student,
                         'children': [
