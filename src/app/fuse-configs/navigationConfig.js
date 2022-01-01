@@ -22,7 +22,7 @@
                         'id'   : 'complaints',
                         'title': 'Complaints',
                         'type' : 'collapse',
-                        'auth' : authRoles.student,
+                        'auth' : authRoles.loggedIn,
                         'children': [
                             {
                                 'id'   : 'add-complaints',
