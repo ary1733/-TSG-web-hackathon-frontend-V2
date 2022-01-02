@@ -2,8 +2,8 @@ import axios from 'axios';
 import {FuseUtils} from '@fuse';
 import {showMessage} from 'app/store/actions/fuse';
 
-export const GET_Complaint = '[E-COMMERCE APP] GET complaint';
-export const SAVE_Complaint = '[E-COMMERCE APP] SAVE complaint';
+export const GET_Complaint = '[Complaints] GET complaint';
+export const SAVE_Complaint = '[Complaints] SAVE complaint';
 
 export function getcomplaint(params)
 {
