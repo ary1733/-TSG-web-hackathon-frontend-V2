@@ -4,16 +4,17 @@ import {showMessage} from 'app/store/actions/fuse';
 
 export const GET_Complaint = '[Complaints] GET complaint';
 export const SAVE_Complaint = '[Complaints] SAVE complaint';
+export const ADD_Remark = '[Complaints] ADD remark'
 
-export function getcomplaint(params)
+export function getcomplaint(complaintId)
 {
-    const request = axios.get('/api/e-commerce-app/complaint', {params});
+    const request = axios.get(`/api/complaints/getcomplaint/${complaintId}`);
 
     return (dispatch) =>
         request.then((response) =>
             dispatch({
                 type   : GET_Complaint,
-                payload: response.data
+                payload: response.data.complain
             })
         );
 }
@@ -37,6 +38,32 @@ export function savecomplaint(data)
                     type   : SAVE_Complaint,
                     payload: response.data
                 })
+            }
+        );
+}
+
+export function addremark(complaintId, remark)
+{
+    const request = fetch('/api/complaints/addRemark', {
+        crossDomain: true,
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+            complain_id:complaintId,
+            remark:remark
+        })
+      })
+    return (dispatch) =>
+        request.then((response) => {
+                dispatch(showMessage({message: 'Remark updated'}));
+
+                return dispatch({
+                    type   : ADD_Remark,
+                    payload: response.data
+                })  
             }
         );
 }

@@ -11,6 +11,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import withReducer from 'app/store/withReducer';
 import * as Actions from '../store/actions';
 import reducer from '../store/reducers';
+import moment from 'moment';
 
 const useStyles = makeStyles(theme => ({
     complaintImageFeaturedStar: {
@@ -52,6 +53,7 @@ function Complaint(props)
     const dispatch = useDispatch();
     const complaint = useSelector(({user}) => user.complaint);
     const complaintId = props.location.pathname.split('/').at(-1);
+    const user = useSelector(({auth}) => auth.user);
 
     const classes = useStyles(props);
     const [tabValue, setTabValue] = useState(0);
@@ -67,7 +69,7 @@ function Complaint(props)
             }
             else
             {
-                dispatch(Actions.getcomplaint(props.match.params));
+                dispatch(Actions.getcomplaint(complaintId));
             }
         }
 
@@ -75,12 +77,10 @@ function Complaint(props)
     }, [dispatch, props.match.params]);
 
     useEffect(() => {
-        if (
-            (complaint.data && !form) ||
-            (complaint.data && form && complaint.data.id !== form.id)
-        )
+        if (complaint.data && !form)
         {
             setForm(complaint.data);
+            console.log(complaint.data)
         }
     }, [form, complaint.data, setForm]);
 
@@ -154,6 +154,7 @@ function Complaint(props)
                                 </div>
                             </div>
                         </div>
+                        {complaintId=='new'?
                         <FuseAnimate animation="transition.slideRightIn" delay={300}>
                             <Button
                                 className="whitespace-no-wrap"
@@ -163,7 +164,18 @@ function Complaint(props)
                             >
                                 Submit
                             </Button>
+                        </FuseAnimate>:
+                        (user.role=='admin' || user.role=='tsg_offical') && <FuseAnimate animation="transition.slideRightIn" delay={300}>
+                            <Button
+                                className="whitespace-no-wrap"
+                                variant="contained"
+                                disabled={!canBeSubmitted()}
+                                onClick={() => dispatch(Actions.addremark(complaintId, form.remark))}
+                            >
+                                Update Remark
+                            </Button>
                         </FuseAnimate>
+                        }
                     </div>
                 )
             }
@@ -185,8 +197,24 @@ function Complaint(props)
                     <div className="p-16 sm:p-24 max-w-2xl">
                         {tabValue === 0 &&
                         (
-                            // <form id="complaint-form" action="/api/complaints/addcomplaint" method="post" enctype="multipart/form-data" onSubmit={(e)=> e.preventDefault()}>
-                            <form id="complaint-form">
+                            <div id="complaint-form">
+                                
+                                {complaintId!='new' && <TextField
+                                    className="mt-8 mb-16"
+                                    id="date"
+                                    name="date"
+                                    onChange={handleChange}
+                                    label="Date"
+                                    type="text"
+                                    value={`${new Date(form.date).toDateString()} ${moment(form.date).format('HH:mm:ss')}`}
+                                    multiline
+                                    rows={1}
+                                    InputProps={{
+                                        readOnly: complaintId != 'new',
+                                      }}
+                                    variant="outlined"
+                                    fullWidth
+                                />}
 
                                 <TextField
                                     className="mt-8 mb-16"
@@ -198,6 +226,9 @@ function Complaint(props)
                                     value={form.subject}
                                     multiline
                                     rows={1}
+                                    InputProps={{
+                                        readOnly: complaintId != 'new',
+                                      }}
                                     variant="outlined"
                                     error ={form.subject && form.subject.length > 0 && form.subject.length <= 50 ? false : true }
                                     helperText={form.subject && form.subject.length > 0 ?form.subject.length <= 50 ?"":"Max 50 characters allowed":"Subject cannot be empty"}
@@ -213,21 +244,50 @@ function Complaint(props)
                                     type="text"
                                     value={form.description}
                                     multiline
-                                    rows={5}
+                                    rows={3}
+                                    InputProps={{
+                                        readOnly: complaintId != 'new',
+                                      }}
                                     variant="outlined"
                                     fullWidth
                                 />
 
-                                <OutlinedDiv label="Attachment">
-                                    <input
-                                        // className="hidden"
-                                        id="attachment"
-                                        type="file"
-                                        name="attachment"
-                                        onChange={handleUploadChange}
-                                    />
-                                </OutlinedDiv>
-                            </form>
+                                {complaintId!='new' && <TextField
+                                    className="mt-8 mb-24"
+                                    id="remark"
+                                    name="remark"
+                                    onChange={handleChange}
+                                    label="Remark"
+                                    type="text"
+                                    value={form.remark}
+                                    multiline
+                                    rows={1}
+                                    InputProps={{
+                                        readOnly: user.role!='admin' && user.role!='tsg_offical',
+                                      }}
+                                    variant="outlined"
+                                    fullWidth
+                                />}
+
+                                    {
+                                        complaintId == 'new'?
+                                        <OutlinedDiv label="Attachment">
+                                            <input
+                                                // className="hidden"
+                                                id="attachment"
+                                                type="file"
+                                                name="attachment"
+                                                onChange={handleUploadChange}
+                                            />
+                                        </OutlinedDiv>:
+                                        form.attachment && (<OutlinedDiv label="Attachment">
+                                            <Button variant="contained" href={form.attachment} target='_blank' className='bg-indigo-darker hover:bg-indigo text-white text-lg' onClick={()=>console.log(form.attachment)}>
+                                                Download
+                                            </Button>
+                                        </OutlinedDiv>)
+                                    }
+
+                            </div>
                         )}
                     </div>
                 )

@@ -18,7 +18,7 @@ const getRole = (user_type)=>{
         case 1:
             return 'admin'
         case 2:
-            return 'staff'
+            return 'tsg_official'
         case 3:
             return 'society'
         case 4:

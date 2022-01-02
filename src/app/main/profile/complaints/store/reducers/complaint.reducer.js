@@ -21,6 +21,13 @@ const complaintReducer = function (state = initialState, action) {
                 data: action.payload
             };
         }
+        case Actions.ADD_Remark:
+        {
+            return {
+                ...state,
+                data: action.payload
+            };
+        }
         default:
         {
             return state;
