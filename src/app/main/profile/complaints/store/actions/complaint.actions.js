@@ -21,7 +21,8 @@ export function getcomplaint(params)
 export function savecomplaint(data)
 {
     const form = new FormData();
-    form.append("description", data.description);
+    for (let key in data)
+        form.append(key, data[key]);
     form.append("attachment", data.attachment);
     const request = fetch('/api/complaints/addcomplaint', {
         method: 'POST',
@@ -43,25 +44,8 @@ export function savecomplaint(data)
 export function newcomplaint()
 {
     const data = {
-        id              : FuseUtils.generateGUID(),
-        name            : '',
-        handle          : '',
         description     : '',
-        categories      : [],
-        tags            : [],
-        images          : [],
-        priceTaxExcl    : 0,
-        priceTaxIncl    : 0,
-        taxRate         : 0,
-        comparedPrice   : 0,
-        quantity        : 0,
-        sku             : '',
-        width           : '',
-        height          : '',
-        depth           : '',
-        weight          : '',
-        extraShippingFee: 0,
-        active          : true
+        active: true
     };
 
     return {

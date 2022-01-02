@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Button, Tab, Tabs, TextField, InputAdornment, Icon, Typography} from '@material-ui/core';
 import {orange} from '@material-ui/core/colors';
 import {makeStyles} from '@material-ui/styles';
-import {FuseAnimate, FusePageCarded, FuseChipSelect, FuseUtils, OutlinedDiv} from '@fuse';
+import {FuseAnimate, FusePageCarded, FuseChipSelect, FuseUtils, OutlinedDiv, TextFieldFormsy} from '@fuse';
 import {useForm} from '@fuse/hooks';
 import {Link} from 'react-router-dom';
 import clsx from 'clsx';
@@ -51,6 +51,7 @@ function Complaint(props)
 {
     const dispatch = useDispatch();
     const complaint = useSelector(({user}) => user.complaint);
+    const complaintId = props.location.pathname.split('/').at(-1);
 
     const classes = useStyles(props);
     const [tabValue, setTabValue] = useState(0);
@@ -60,8 +61,6 @@ function Complaint(props)
     useEffect(() => {
         function updatecomplaintState()
         {
-            const params = props.match.params;
-            const complaintId = props.location.pathname.split('/').at(-1);
             if ( complaintId === 'new' )
             {
                 dispatch(Actions.newcomplaint(), complaintId);
@@ -146,7 +145,7 @@ function Complaint(props)
                                 <div className="flex flex-col min-w-0">
                                     <FuseAnimate animation="transition.slideLeftIn" delay={300}>
                                         <Typography className="text-16 sm:text-20 truncate">
-                                            {form.name ? form.name : 'New complaint'}
+                                            {form.subject ? form.subject : 'New complaint'}
                                         </Typography>
                                     </FuseAnimate>
                                     <FuseAnimate animation="transition.slideLeftIn" delay={300}>
@@ -188,6 +187,22 @@ function Complaint(props)
                         (
                             // <form id="complaint-form" action="/api/complaints/addcomplaint" method="post" enctype="multipart/form-data" onSubmit={(e)=> e.preventDefault()}>
                             <form id="complaint-form">
+
+                                <TextField
+                                    className="mt-8 mb-16"
+                                    id="subject"
+                                    name="subject"
+                                    onChange={handleChange}
+                                    label="Subject"
+                                    type="text"
+                                    value={form.subject}
+                                    multiline
+                                    rows={1}
+                                    variant="outlined"
+                                    error ={form.subject && form.subject.length > 0 && form.subject.length <= 50 ? false : true }
+                                    helperText={form.subject && form.subject.length > 0 ?form.subject.length <= 50 ?"":"Max 50 characters allowed":"Subject cannot be empty"}
+                                    fullWidth
+                                />
 
                                 <TextField
                                     className="mt-8 mb-16"
