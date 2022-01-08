@@ -5,7 +5,7 @@ const settingsConfig = {
     },
     customScrollbars: true,
     theme           : {
-        main   : 'deepOcean',
+        main   : 'dark9',
         navbar : 'mainThemeDark',
         toolbar: 'mainThemeDark',
         footer : 'mainThemeDark'

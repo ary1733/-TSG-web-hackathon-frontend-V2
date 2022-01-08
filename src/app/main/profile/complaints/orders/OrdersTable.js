@@ -105,7 +105,7 @@ function OrdersTable(props)
 
             <FuseScrollbars className="flex-grow overflow-x-auto">
 
-                <Table stickyHeader className="min-w-xl" aria-labelledby="tableTitle">
+                <Table className="min-w-xl" aria-labelledby="tableTitle">
 
                     <OrdersTableHead
                         numSelected={selected.length}

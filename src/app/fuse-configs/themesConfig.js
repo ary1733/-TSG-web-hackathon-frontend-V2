@@ -730,9 +730,18 @@ const themesConfig = {
       },
       error: red,
     },
+    overrides: {
+      MuiInputLabel: { // Name of the component ⚛️ / style sheet
+        root: { // Name of the rule
+          "&$focused": { // increase the specificity for the pseudo class
+            color: "#204657"
+          }
+        }
+      }
+    },
     status: {
       danger: 'orange',
-    },
+    }
   },
   dark10: {
     palette: {

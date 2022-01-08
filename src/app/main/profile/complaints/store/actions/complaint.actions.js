@@ -27,7 +27,8 @@ export function savecomplaint(data)
     form.append("attachment", data.attachment);
     const request = fetch('/api/complaints/addcomplaint', {
         method: 'POST',
-        body: form
+        body: form,
+        credentials: 'include'
       })
     return (dispatch) =>
         request.then((response) => {
