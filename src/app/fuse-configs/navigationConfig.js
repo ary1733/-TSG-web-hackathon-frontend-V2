@@ -65,6 +65,32 @@
                 'url'  : '/events/results'
             }
         ]
+    },
+    {
+        'id'   : 'studentspoint',
+                'title': "Students\' Point",
+                'type' : 'collapse',
+                'icon' : 'school',
+                'badge'   : {
+                    'title': 3,
+                    'bg'   : '#525E8A',
+                    'fg'   : '#FFFFFF'
+                },
+                'auth' : authRoles.loggedIn,
+        'children': [
+            {
+                'id'   : 'academic-point',
+                'title': 'Academic Point',
+                'type' : 'item',
+                'url'  : '/students-point/academic-point'
+            },
+            {
+                'id'   : 'career-point',
+                'title': 'Career Point',
+                'type' : 'item',
+                'url'  : '/students-point/career-point'
+            }
+        ]
     }
 ];
 
