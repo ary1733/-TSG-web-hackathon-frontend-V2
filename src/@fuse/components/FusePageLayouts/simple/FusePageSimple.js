@@ -42,7 +42,6 @@ const useStyles = makeStyles(theme => ({
         color          : theme.palette.primary.contrastText,
         backgroundSize : 'cover',
         backgroundColor: theme.palette.primary.dark,
-        position: 'fixed',
         width: '100%'
     },
     topBg                    : {
@@ -88,8 +87,7 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center'
     },
     content                  : {
-        flex: '1 0 auto',
-        marginTop: '120px'
+        flex: '1 0 auto'
     },
     sidebarWrapper           : {
         overflow       : 'hidden',

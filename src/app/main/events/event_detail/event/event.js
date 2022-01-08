@@ -58,7 +58,7 @@ function EventInfo(props)
         <FusePageSimple
             classes={{
                 content: "flex flex-col flex-auto overflow-hidden",
-                header : "h-100 min-h-100 fixed z-10"
+                header : "h-100 min-h-100 z-10"
             }}
             header={
                 <div className="flex flex-1 items-center px-16 lg:px-24">
