@@ -13,8 +13,6 @@ import moment from 'moment';
 import jwtService from 'app/services/jwtService';
 import { Button } from '@material-ui/core';
 
-// import poster from ".images/check.jpg";
-
 const useStyles = makeStyles(theme => ({
     stepLabel : {
         cursor: 'pointer!important'
@@ -50,9 +48,9 @@ function EventInfo(props)
         }
       }
 
-    const headingClasses = "text-3xl font-bold text-indigo-darker";
-    const pClasses = "text-xl mb-10 font-semibold text-black";
-    const listElementsClasses = "text-xl mb-2 font-semibold text-black";
+    const headingClasses = "text-3xl font-bold text-indigo-light";
+    const pClasses = "text-xl mb-10 font-semibold text-white";
+    const listElementsClasses = "text-xl mb-2 font-semibold text-white";
 
     return (
         <FusePageSimple

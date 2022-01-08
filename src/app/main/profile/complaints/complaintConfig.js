@@ -12,6 +12,10 @@ export const complaintConfig = {
     auth    : authRoles.loggedIn,
     routes  : [
         {
+            path     : '/profile/complaints/all',
+            component: React.lazy(() => import('./orders/Orders'))
+        },
+        {
             path     : '/profile/complaints',
             component: React.lazy(() => import('./complaint/Complaint'))
         }

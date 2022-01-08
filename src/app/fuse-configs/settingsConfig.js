@@ -5,9 +5,9 @@ const settingsConfig = {
     },
     customScrollbars: true,
     theme           : {
-        main   : 'default',
+        main   : 'deepOcean',
         navbar : 'mainThemeDark',
-        toolbar: 'mainThemeLight',
+        toolbar: 'mainThemeDark',
         footer : 'mainThemeDark'
     }
 };

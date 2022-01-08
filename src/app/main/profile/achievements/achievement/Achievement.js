@@ -183,10 +183,9 @@ function Achievements(props) {
                                                 </div>
                                                 <CardContent className="flex flex-col flex-auto items-center justify-center">
                                                     {/* content of events here */}
-                                                    <Typography className="text-center text-16 font-400">Position <Icon>directions_run</Icon> <h3>{achievement.position}</h3> in 
+                                                    <Typography className="text-center text-16 font-400">Position <Icon>directions_run</Icon> <strong>{achievement.position}</strong> in 
                                                     <Link
                                                         to={{ pathname: `/events/${achievement.event_id}/${achievement.event_title}`, state: { prevPath: window.location.pathname } }} // event page
-                                                        component={Link}
                                                         className="justify-start px-3"
                                                         color="secondary"
                                                     >

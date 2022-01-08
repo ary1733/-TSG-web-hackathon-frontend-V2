@@ -5,7 +5,7 @@ export const GET_CATEGORIES = '[EVENTS] GET CATEGORIES';
 
 export function getCurrent()
 {
-    const request = axios.get('/api/events/current');
+    const request = axios.get('/api/events/current', {withCredentials: true});
 
     return (dispatch) =>
         request.then((response) =>{
