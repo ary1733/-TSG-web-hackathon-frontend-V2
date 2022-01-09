@@ -63,7 +63,7 @@ const useStyles = makeStyles(theme => ({
 function Event(props)
 {
     const dispatch = useDispatch();
-    const event = useSelector(({user}) => user.event);
+    const event = useSelector(({newEvent}) => newEvent.event);
     const eventId = props.location.pathname.split('/').at(-1);
     const user = useSelector(({auth}) => auth.user);
 
@@ -210,29 +210,16 @@ function Event(props)
                         (
                             <div id="event-form">
                                 
-                                {eventId!='new' && <TextField
-                                    className="mt-8 mb-16"
-                                    id="date"
-                                    name="date"
-                                    onChange={handleChange}
-                                    label="Date"
-                                    type="text"
-                                    value={`${new Date(form.date).toDateString()} ${moment(form.date).format('HH:mm:ss')}`}
-                                    multiline
-                                    rows={1}
-                                    InputProps={{
-                                        readOnly: eventId != 'new',
-                                      }}
-                                    variant="outlined"
-                                    fullWidth
-                                />}
-                                <FormControl fullWidth variant='outlined'>
+                            <FormControl 
+                                fullWidth 
+                                variant='outlined' 
+                                className="mt-8 mb-16">
                                     <InputLabel >Event Type</InputLabel>
-                                    <Select
+                                    <Select className="pl-5"
                                         name="type"
-                                        type="text"
+                                        type="radio"
                                         value={form.type}
-                                        label="text"//doubt
+                                        label="Event Type"//doubt
                                         onChange={handleChange}
                                     >
                                         <MenuItem value={"Technology"}>Technology</MenuItem>
@@ -253,8 +240,6 @@ function Event(props)
                                     multiline
                                     rows={1}
                                     variant="outlined"
-                                    error ={form.title && form.title.length > 0 && form.title.length <= 100 ? false : true }
-                                    helperText={form.title && form.title.length > 0 ?form.title.length <= 100 ?"":"Max 100 characters allowed":"Title cannot be empty"}
                                     fullWidth
                                 />
 
@@ -285,6 +270,7 @@ function Event(props)
                                     variant="outlined"
                                     fullWidth
                                 />
+
                                 <TextField
                                     className="mt-8 mb-16"
                                     id="judge_criteria"
@@ -324,18 +310,16 @@ function Event(props)
                                     multiline
                                     rows={2}
                                     variant="outlined"
-                                    error ={((form.venue?false:true) || form.venue.length <= 200 ? false : true )}
-                                    helperText={(form.venue?false:true) || form.venue.length <= 200 ?"":"Max 200 characters allowed"}
                                     fullWidth
                                 />
 
                                 <FormControl fullWidth variant='outlined' className="mt-8 mb-16">
                                     <InputLabel >Event Tag</InputLabel>
-                                    <Select
+                                    <Select className="pl-5"
                                         name="tag"
-                                        type="text"
+                                        type="radio"
                                         value={form.tag}
-                                        label="text"//doubt
+                                        label="Event Tag"//doubt
                                         onChange={handleChange}
                                     >
                                         <MenuItem value={"Inter IIT"}>Inter IIT</MenuItem>
@@ -344,59 +328,43 @@ function Event(props)
                                     </Select>
                                 </FormControl>
 
-                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                    <KeyboardDateTimePicker 
-                                    label = "Material Date Picker"
-                                    value = {form.start}
-                                    onChange = {handleDateChangeStart}
-                                    />
+                                <Typography fullWidth className="mt-8 mb-16 pl-5">
+                                    <MuiPickersUtilsProvider utils={DateFnsUtils} fullWidth>
+                                        <KeyboardDateTimePicker 
+                                        label = "Start"
+                                        value = {form.start}
+                                        onChange = {handleDateChangeStart}
+                                        />
+                                    </MuiPickersUtilsProvider>
+                                </Typography>
+
+                                <Typography fullWidth className="mt-8 mb-16 pl-5">
+                                    <MuiPickersUtilsProvider utils={DateFnsUtils} fullWidth>
+                                        <KeyboardDateTimePicker 
+                                        label = "End"
+                                        value = {form.end}
+                                        onChange = {handleDateChangeEnd}
+                                        />
                                 </MuiPickersUtilsProvider>
+                                </Typography>
 
-                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                    <KeyboardDateTimePicker 
-                                    label = "End date and time of the event"
-                                    value = {form.end}
-                                    onChange = {handleDateChangeEnd}
+                                <OutlinedDiv label="Poster" className="mt-8 mb-16">
+                                    <input
+                                        // className="hidden"
+                                        id="poster"
+                                        type="file"
+                                        name="poster"
+                                        onChange={handleUploadChange}
                                     />
-                                </MuiPickersUtilsProvider>
-
-
-
-                                {/* <TextField
-                                    className="mt-8 mb-16"
-                                    id="description"
-                                    name="description"
-                                    onChange={handleChange}
-                                    label="Description"
-                                    type="text"
-                                    value={form.description}
-                                    multiline
-                                    rows={3}
-                                    variant="outlined"
-                                    fullWidth
-                                /> */}
-
-
-                                    {
-                                        <OutlinedDiv label="Poster">
-                                            <input
-                                                // className="hidden"
-                                                id="poster"
-                                                type="file"
-                                                name="poster"
-                                                onChange={handleUploadChange}
-                                            />
-                                        </OutlinedDiv>
-                                    }
+                                </OutlinedDiv>
 
                             </div>
                         )}
                     </div>
                 )
             }
-            innerScroll
         />
     )
 }
 
-export default withReducer('user', reducer)(Event);
+export default withReducer('newEvent', reducer)(Event);

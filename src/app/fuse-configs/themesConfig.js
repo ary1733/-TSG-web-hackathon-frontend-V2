@@ -731,6 +731,16 @@ const themesConfig = {
       error: red,
     },
     overrides: {
+      MuiSelect:{
+        icon:{
+          color:"white"
+        }
+      },
+      MuiIconButton:{
+        root:{
+          color:"white"
+        }
+      },
       MuiInputLabel: { // Name of the component ⚛️ / style sheet
         root: { // Name of the rule
           "&$focused": { // increase the specificity for the pseudo class

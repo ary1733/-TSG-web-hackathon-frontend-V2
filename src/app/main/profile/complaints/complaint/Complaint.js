@@ -292,7 +292,6 @@ function Complaint(props)
                     </div>
                 )
             }
-            innerScroll
         />
     )
 }
