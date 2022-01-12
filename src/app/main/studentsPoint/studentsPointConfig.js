@@ -1,7 +1,10 @@
 import { authRoles } from 'app/auth';
 import React from 'react'
+import { careerEventConfig } from './careerPoint/careerPointConfig';
 
-export const studentsPointConfig = [{
+export const studentsPointConfig = [
+    careerEventConfig,
+    {
     settings: {
         layout: {
             style : 'layout1', // layout-1 layout-2 layout-3
@@ -13,10 +16,6 @@ export const studentsPointConfig = [{
         {
             path     : '/students-point/academic-point',
             component: React.lazy(() => import('./academicPoint/AcademicPoint'))
-        },
-        {
-            path     : '/students-point/career-point',
-            component: React.lazy(()=> import('./careerPoint/CareerPoint'))
         },
         {
             path     : '/students-point',
