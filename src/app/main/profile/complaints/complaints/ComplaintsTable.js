@@ -3,18 +3,18 @@ import {Table, TableBody, TableCell, TablePagination, TableRow, Checkbox} from '
 import {FuseScrollbars, FuseUtils} from '@fuse';
 import {withRouter} from 'react-router-dom';
 import _ from '@lodash';
-import OrdersTableHead from './OrdersTableHead';
+import ComplaintsTableHead from './ComplaintsTableHead';
 import * as Actions from '../store/actions';
 import {useDispatch, useSelector} from 'react-redux';
 
-function OrdersTable(props)
+function ComplaintsTable(props)
 {
     const dispatch = useDispatch();
-    const orders = useSelector(({eCommerceApp}) => eCommerceApp.complaints.data);
-    const searchText = useSelector(({eCommerceApp}) => eCommerceApp.complaints.searchText);
+    const complaints = useSelector(({complaints}) => complaints.complaints.data);
+    const searchText = useSelector(({complaints}) => complaints.complaints.searchText);
 
     const [selected, setSelected] = useState([]);
-    const [data, setData] = useState(orders);
+    const [data, setData] = useState(complaints);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [order, setOrder] = useState({
@@ -27,9 +27,9 @@ function OrdersTable(props)
     }, [dispatch]);
 
     useEffect(() => {
-        console.log(orders);
-        setData(searchText.length === 0 ? orders : FuseUtils.filterArrayByString(orders, searchText))
-    }, [orders, searchText]);
+        console.log(complaints);
+        setData(searchText.length === 0 ? complaints : FuseUtils.filterArrayByString(complaints, searchText))
+    }, [complaints, searchText]);
 
     function handleRequestSort(event, property)
     {
@@ -107,7 +107,7 @@ function OrdersTable(props)
 
                 <Table className="min-w-xl" aria-labelledby="tableTitle">
 
-                    <OrdersTableHead
+                    <ComplaintsTableHead
                         numSelected={selected.length}
                         order={order}
                         onSelectAllClick={handleSelectAllClick}
@@ -170,6 +170,9 @@ function OrdersTable(props)
                                                 {new Date(n.date).toDateString()}
                                             </TableCell>
 
+                                            <TableCell component="th" scope="row">
+                                                {n.made_by}
+                                            </TableCell>
                                         </TableRow>
                                     );
                                 })}
@@ -195,4 +198,4 @@ function OrdersTable(props)
     );
 }
 
-export default withRouter(OrdersTable);
+export default withRouter(ComplaintsTable);

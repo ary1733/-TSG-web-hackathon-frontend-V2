@@ -254,6 +254,22 @@ function Complaint(props)
                                     variant="outlined"
                                     fullWidth
                                 />
+                            {complaintId!='new' && <TextField
+                                    className="mt-8 mb-24"
+                                    id="made_by"
+                                    name="Made By"
+                                    onChange={handleChange}
+                                    label="Made By"
+                                    type="text"
+                                    value={form.made_by}
+                                    multiline
+                                    rows={1}
+                                    InputProps={{
+                                        readOnly: complaintId != 'new',
+                                      }}
+                                    variant="outlined"
+                                    fullWidth
+                                />}
 
                                 {complaintId!='new' && <TextField
                                     className="mt-8 mb-24"
@@ -266,7 +282,7 @@ function Complaint(props)
                                     multiline
                                     rows={1}
                                     InputProps={{
-                                        readOnly: user.role!='admin' && user.role!='tsg_offical',
+                                        readOnly: user.role!='admin' && user.role!='tsg_official',
                                       }}
                                     variant="outlined"
                                     fullWidth
