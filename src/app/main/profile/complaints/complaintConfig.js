@@ -16,7 +16,7 @@ export const complaintConfig = {
             component: React.lazy(() => import('./orders/Orders'))
         },
         {
-            path     : '/profile/complaints',
+            path     : '/profile/complaints/:Id',
             component: React.lazy(() => import('./complaint/Complaint'))
         }
     ]

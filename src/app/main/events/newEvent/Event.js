@@ -23,7 +23,7 @@ import {
     MuiPickersUtilsProvider,
     KeyboardDateTimePicker
   } from '@material-ui/pickers';
-import { formatDistance } from 'date-fns/locale/af';
+import { date, formatDistance } from 'date-fns/locale/af';
 
 const useStyles = makeStyles(theme => ({
     eventImageFeaturedStar: {
@@ -70,7 +70,6 @@ function Event(props)
     const classes = useStyles(props);
     const [tabValue, setTabValue] = useState(0);
     const {form, handleChange, setForm} = useForm(null);
-    const [attachment, setattachment] = useState(null);
 
     useEffect(() => {
         function updateeventState()
@@ -85,7 +84,7 @@ function Event(props)
         if (event.data && !form)
         {
             setForm(event.data);
-            console.log(event.data)
+            console.log(event.data);
         }
     }, [form, event.data, setForm]);
 
@@ -136,6 +135,7 @@ function Event(props)
     function canBeSubmitted()
     {
         return (
+            form.title && form.title.length > 0 && form.start && form.end &&
             !_.isEqual(event.data, form)
         );
     }
@@ -210,24 +210,7 @@ function Event(props)
                         (
                             <div id="event-form">
                                 
-                            <FormControl 
-                                fullWidth 
-                                variant='outlined' 
-                                className="mt-8 mb-16">
-                                    <InputLabel >Event Type</InputLabel>
-                                    <Select className="pl-5"
-                                        name="type"
-                                        type="radio"
-                                        value={form.type}
-                                        label="Event Type"//doubt
-                                        onChange={handleChange}
-                                    >
-                                        <MenuItem value={"Technology"}>Technology</MenuItem>
-                                        <MenuItem value={"Social and Culture"}>Social and Culture</MenuItem>
-                                        <MenuItem value={"Sports and Games"}>Sports and Games</MenuItem>
-                                        <MenuItem value={"Student's Welfare"}>Student's Welfare</MenuItem>
-                                    </Select>
-                                </FormControl>
+                            
 
                                 <TextField
                                     className="mt-8 mb-16"
@@ -236,7 +219,7 @@ function Event(props)
                                     onChange={handleChange}
                                     label="Title"
                                     type="text"
-                                    value={form.title}
+                                    value={form.title?form.title:""}
                                     multiline
                                     rows={1}
                                     variant="outlined"
@@ -250,7 +233,7 @@ function Event(props)
                                     onChange={handleChange}
                                     label="Introduction"
                                     type="text"
-                                    value={form.introduction}
+                                    value={form.introduction?form.introduction:""}
                                     multiline
                                     rows={3}
                                     variant="outlined"
@@ -264,7 +247,7 @@ function Event(props)
                                     onChange={handleChange}
                                     label="Procedure"
                                     type="text"
-                                    value={form.procedure}
+                                    value={form.procedure?form.procedure:""}
                                     multiline
                                     rows={3}
                                     variant="outlined"
@@ -278,14 +261,34 @@ function Event(props)
                                     onChange={handleChange}
                                     label="Judge Criteria"
                                     type="text"
-                                    value={form.judge_criteria}
+                                    value={form.judge_criteria?form.judge_criteria:""}
                                     multiline
                                     rows={3}
                                     variant="outlined"
                                     fullWidth
                                 />
+                                
+                                <FuseChipSelect
+                                    className="mt-8 mb-16"
+                                    value={
+                                        form.timeline && form.timeline.map(item => ({
+                                            value: item,
+                                            label: item
+                                        }))
+                                    }
+                                    onChange={(value) => handleChipChange(value, 'timeline')}
+                                    placeholder="Enter timeline"
+                                    textFieldProps={{
+                                        label          : 'Timeline',
+                                        InputLabelProps: {
+                                            shrink: true
+                                        },
+                                        variant        : 'outlined'
+                                    }}
+                                    isMulti
+                                />
 
-                                <TextField
+                                {/* <TextField
                                     className="mt-8 mb-16"
                                     id="timeline"
                                     name="timeline"
@@ -297,7 +300,7 @@ function Event(props)
                                     rows={3}
                                     variant="outlined"
                                     fullWidth
-                                />
+                                /> */}
 
                                 <TextField
                                     className="mt-8 mb-16"
@@ -306,19 +309,38 @@ function Event(props)
                                     onChange={handleChange}
                                     label="Venue"
                                     type="text"
-                                    value={form.venue}
+                                    value={form.venue?form.venue:""}
                                     multiline
                                     rows={2}
                                     variant="outlined"
                                     fullWidth
                                 />
+                            
+                            <FormControl 
+                                fullWidth 
+                                variant='outlined' 
+                                className="mt-8 mb-16">
+                                    <InputLabel >Event Type</InputLabel>
+                                    <Select className="pl-5"
+                                        name="type"
+                                        type="radio"
+                                        value={form.type?form.type:""}
+                                        label="Event Type"//doubt
+                                        onChange={handleChange}
+                                    >
+                                        <MenuItem value={"Technology"}>Technology</MenuItem>
+                                        <MenuItem value={"Social and Culture"}>Social and Culture</MenuItem>
+                                        <MenuItem value={"Sports and Games"}>Sports and Games</MenuItem>
+                                        <MenuItem value={"Student's Welfare"}>Student's Welfare</MenuItem>
+                                    </Select>
+                            </FormControl>
 
                                 <FormControl fullWidth variant='outlined' className="mt-8 mb-16">
                                     <InputLabel >Event Tag</InputLabel>
                                     <Select className="pl-5"
                                         name="tag"
                                         type="radio"
-                                        value={form.tag}
+                                        value={form.tag?form.tag:""}
                                         label="Event Tag"//doubt
                                         onChange={handleChange}
                                     >
@@ -328,25 +350,25 @@ function Event(props)
                                     </Select>
                                 </FormControl>
 
-                                <Typography fullWidth className="mt-8 mb-16 pl-5">
-                                    <MuiPickersUtilsProvider utils={DateFnsUtils} fullWidth>
-                                        <KeyboardDateTimePicker 
-                                        label = "Start"
-                                        value = {form.start}
-                                        onChange = {handleDateChangeStart}
-                                        />
+                                <div className="mt-8 mb-16 pl-5">
+                                    <MuiPickersUtilsProvider utils={DateFnsUtils} fullWidth >
+                                            <KeyboardDateTimePicker 
+                                            label = "Start"
+                                            value = {form.start?form.start:String(new Date())}
+                                            onChange = {handleDateChangeStart}
+                                            />  
                                     </MuiPickersUtilsProvider>
-                                </Typography>
+                                </div>
 
-                                <Typography fullWidth className="mt-8 mb-16 pl-5">
+                                <div className="mt-8 mb-16 pl-5">
                                     <MuiPickersUtilsProvider utils={DateFnsUtils} fullWidth>
                                         <KeyboardDateTimePicker 
                                         label = "End"
-                                        value = {form.end}
+                                        value = {form.end?form.end:String(new Date())}
                                         onChange = {handleDateChangeEnd}
                                         />
                                 </MuiPickersUtilsProvider>
-                                </Typography>
+                                </div>
 
                                 <OutlinedDiv label="Poster" className="mt-8 mb-16">
                                     <input
