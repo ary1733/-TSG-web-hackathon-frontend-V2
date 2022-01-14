@@ -221,7 +221,9 @@ function Event(props)
                                     value={form.title?form.title:""}
                                     multiline
                                     rows={1}
-                                    variant="outlined"
+                                    variant="outlined"                                      
+                                    error ={form.title && form.title.length > 0?false : true }
+                                    helperText={form.title && form.title.length > 0 ?"":"Title cannot be empty"}
                                     fullWidth
                                 />
 
@@ -318,7 +320,8 @@ function Event(props)
                             <FormControl 
                                 fullWidth 
                                 variant='outlined' 
-                                className="mt-8 mb-16">
+                                className="mt-8 mb-16"
+                                error ={form.type?false : true }>
                                     <InputLabel >Event Type</InputLabel>
                                     <Select className="pl-5"
                                         name="type"
@@ -334,7 +337,7 @@ function Event(props)
                                     </Select>
                             </FormControl>
 
-                                <FormControl fullWidth variant='outlined' className="mt-8 mb-16">
+                                <FormControl fullWidth variant='outlined' className="mt-8 mb-16" error ={form.tag?false : true }>
                                     <InputLabel >Event Tag</InputLabel>
                                     <Select className="pl-5"
                                         name="tag"
