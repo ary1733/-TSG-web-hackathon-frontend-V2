@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Button, Tab, Tabs, TextField, InputAdornment, Icon, Typography, Grid} from '@material-ui/core';
 import {orange} from '@material-ui/core/colors';
 import {makeStyles} from '@material-ui/styles';
-import {FuseAnimate, FusePageCarded, FuseChipSelect, FuseUtils, OutlinedDiv, TextFieldFormsy} from '@fuse';
+import {FuseAnimate, FusePageCarded, FuseChipSelect, FuseUtils, OutlinedDiv, TextFieldFormsy, Multi_select_text} from '@fuse';
 import {useForm} from '@fuse/hooks';
 import { FormControl } from '@material-ui/core';
 import { MenuItem } from '@material-ui/core';
@@ -135,8 +135,7 @@ function Event(props)
     function canBeSubmitted()
     {
         return (
-            form.title && form.title.length > 0 && form.start && form.end &&
-            !_.isEqual(event.data, form)
+            form.title && form.title.length > 0 && form.type && form.type.length > 0 && form.tag && form.tag.length > 0 && form.start && form.end
         );
     }
 

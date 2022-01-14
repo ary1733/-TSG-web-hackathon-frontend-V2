@@ -9,9 +9,14 @@ export const SAVE_Event = '[events] SAVE event';
 export function saveevent(data)
 {
     const form = new FormData();
-    for (let key in data)
-        form.append(key, data[key]);
-    form.timeline = JSON.stringify(form.timeline)
+    for (let key in data){
+        if (Array.isArray(data[key]))
+            form.append(key, JSON.stringify(data[key]))
+        else
+            form.append(key, data[key]);
+        console.log(key, data[key]);
+    }
+    console.log(form.timeline);
     form.append("attachment", data.attachment);
     const request = fetch('/api/events/add', {
         method: 'POST',

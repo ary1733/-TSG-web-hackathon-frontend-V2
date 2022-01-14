@@ -29,3 +29,4 @@ export * from './components/formsy/index';
 export {default as FuseLayouts} from 'app/fuse-layouts/FuseLayouts';
 export {default as FuseLayoutConfigs} from 'app/fuse-layouts/FuseLayoutConfigs';
 export {default as NavLinkAdapter} from './components/NavLinkAdapter/NavLinkAdapter';
+export {default as Multi_select_text} from './components/Multi_select_text/Multi_select_text';
