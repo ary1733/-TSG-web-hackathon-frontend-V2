@@ -53,7 +53,7 @@ function Complaint(props)
     const dispatch = useDispatch();
     const complaint = useSelector(({user}) => user.complaint);
     const user = useSelector(({auth}) => auth.user);
-    let complaintId = null;
+    let complaintId = 'new';
     const classes = useStyles(props);
     const [tabValue, setTabValue] = useState(0);
     const {form, handleChange, setForm} = useForm(null);
@@ -117,7 +117,7 @@ function Complaint(props)
     function canBeSubmitted()
     {
         return (
-            form.description && form.description.length > 0 &&
+            form.subject && form.subject.length > 0 && form.description && form.description.length > 0 &&
             !_.isEqual(complaint.data, form)
         );
     }
@@ -250,7 +250,9 @@ function Complaint(props)
                                     rows={3}
                                     InputProps={{
                                         readOnly: complaintId != 'new',
-                                      }}
+                                      }}                                    
+                                      error ={form.description && form.description.length > 0?false : true }
+                                      helperText={form.description && form.description.length > 0 ?"":"Description cannot be empty"}
                                     variant="outlined"
                                     fullWidth
                                 />
