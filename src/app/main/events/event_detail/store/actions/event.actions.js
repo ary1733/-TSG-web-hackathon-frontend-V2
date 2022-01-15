@@ -8,10 +8,13 @@ export function getEventInfo(event_id)
     const request = axios.get('/api/events/'+event_id+"/info");
 
     return (dispatch) =>
-        request.then((response) =>
-            dispatch({
-                type   : GET_EVENT_INFO,
-                payload: response.data
-            })
+        request.then((response) =>{
+                console.log(response.data.timeline);
+                response.data.timeline = JSON.parse(response.data.timeline);
+                return dispatch({
+                    type   : GET_EVENT_INFO,
+                    payload: response.data
+                })
+            }
         );
 }

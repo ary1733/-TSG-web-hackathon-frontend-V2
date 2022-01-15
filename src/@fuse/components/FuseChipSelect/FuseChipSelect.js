@@ -216,7 +216,7 @@ const components = {
     Option,
     Placeholder,
     SingleValue,
-    ValueContainer
+    ValueContainer,
 };
 
 function FuseChipSelect(props)

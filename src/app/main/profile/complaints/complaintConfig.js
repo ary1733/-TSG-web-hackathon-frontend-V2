@@ -13,10 +13,10 @@ export const complaintConfig = {
     routes  : [
         {
             path     : '/profile/complaints/all',
-            component: React.lazy(() => import('./orders/Orders'))
+            component: React.lazy(() => import('./complaints/Complaints'))
         },
         {
-            path     : '/profile/complaints',
+            path     : '/profile/complaints/:Id',
             component: React.lazy(() => import('./complaint/Complaint'))
         }
     ]

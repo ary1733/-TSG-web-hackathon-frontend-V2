@@ -5,10 +5,10 @@ import {FuseAnimate} from '@fuse';
 import * as Actions from '../store/actions';
 import {useDispatch, useSelector} from 'react-redux';
 
-function OrdersHeader(props)
+function ComplaintsHeader(props)
 {
     const dispatch = useDispatch();
-    const searchText = useSelector(({eCommerceApp}) => eCommerceApp.complaints.searchText);
+    const searchText = useSelector(({complaints}) => complaints.complaints.searchText);
     const mainTheme = useSelector(({fuse}) => fuse.settings.mainTheme);
 
     return (
@@ -52,4 +52,4 @@ function OrdersHeader(props)
     );
 }
 
-export default OrdersHeader;
+export default ComplaintsHeader;
