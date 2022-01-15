@@ -715,7 +715,8 @@ const themesConfig = {
       text: darkText,
       primary: {
         light: '#BCC8CD',
-        main: '#204657',
+        // main: '#204657',
+        main: '#6a26cd',
         dark: '#0B202C',
       },
       secondary: {
@@ -744,7 +745,8 @@ const themesConfig = {
       MuiInputLabel: { // Name of the component ⚛️ / style sheet
         root: { // Name of the rule
           "&$focused": { // increase the specificity for the pseudo class
-            color: "#204657"
+            // color: "#204657"
+            color: "#6a26cd"
           }
         }
       }

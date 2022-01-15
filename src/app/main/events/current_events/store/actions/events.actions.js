@@ -25,7 +25,7 @@ export function getCategories()
             'id'   : 0,
             'value': 'Technology',
             'label': 'Technology',
-            'color': "#0000ff"
+            'color': "#6a26cd"
         },
         {
             'id'   : 1,
