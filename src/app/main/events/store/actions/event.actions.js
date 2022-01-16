@@ -4,6 +4,8 @@ import {showMessage} from 'app/store/actions/fuse';
 
 export const GET_Event = '[events] GET event';
 export const SAVE_Event = '[events] SAVE event';
+export const SAVE_Achievement = '[achievements] SAVE achievement';
+export const GET_Achievement = '[achievements] GET achievement';
 // export const ADD_Remark = '[Complaints] ADD remark'
 
 
@@ -31,7 +33,42 @@ export function saveevent(data)
         );
 }
 
+export function saveachievement(data)
+{
+    const form = new FormData();
+    for (let key in data)
+        form.append(key, data[key]);
+    form.append("attachment", data.attachment);
+    const request = fetch('/api/achievement/add', {
+        method: 'POST',
+        credentials: "include",
+        body: form
+      })
+    return (dispatch) =>
+        request.then((response) => {
 
+                dispatch(showMessage({message: 'achievement Saved'}));
+
+                return dispatch({
+                    type   : SAVE_Achievement,
+                    payload: response.data
+                })
+            }
+        );
+}
+
+export function newachievement()
+{
+    const data = {
+        description     : '',
+        active: true
+    };
+
+    return {
+        type   : GET_Achievement,
+        payload: data
+    }
+}
 
 export function newevent()
 {
