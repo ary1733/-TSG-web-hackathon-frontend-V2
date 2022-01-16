@@ -2,7 +2,7 @@ import axios from 'axios';
 import {showMessage} from 'app/store/actions/fuse';
 
 export const SAVE_Complaint = '[Complaints] SAVE complaint';
-
+export const RESET_Complaint = '[Complaints] RESET complaint';
 
 export function savecomplaint(data)
 {
@@ -23,8 +23,7 @@ export function savecomplaint(data)
                 dispatch(showMessage({message: 'Career Saved'}));
 
                 return dispatch({
-                    type   : SAVE_Complaint,
-                    payload: response.data
+                    type   : RESET_Complaint,
                 })
             }
         );
@@ -33,9 +32,9 @@ export function savecomplaint(data)
 export function newcomplaint()
 {
     const data = {
-        title : "Test",
-        jobprofile : "Test job",
-        location : "Remote",
+        title : "Enter Name..",
+        jobprofile : "Enter jobprofile..",
+        location : "Enter location..",
         type : "Other"
     };
 

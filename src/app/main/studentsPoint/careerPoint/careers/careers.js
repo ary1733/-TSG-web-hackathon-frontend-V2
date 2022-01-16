@@ -17,7 +17,7 @@ import {
 } from '@material-ui/core';
 import Axios from 'axios';
 import {makeStyles, useTheme} from '@material-ui/styles';
-import {FuseAnimate, FuseAnimateGroup} from '@fuse';
+import {FuseAnimate, FuseAnimateGroup, FuseUtils} from '@fuse';
 import {useDispatch, useSelector} from 'react-redux';
 import withReducer from 'app/store/withReducer';
 import clsx from 'clsx';
@@ -25,7 +25,8 @@ import _ from '@lodash';
 // import {Link} from 'react-router-dom';
 import * as Actions from '../store/actions';
 import reducer from '../store/reducers';
-import jwtService from 'app/services/jwtService';
+import { authRoles } from 'app/auth';
+import { Link } from 'react-router-dom';
 // import moment from 'moment';
 
 const useStyles = makeStyles(theme => ({
@@ -50,7 +51,7 @@ function Careers(props)
     const dispatch = useDispatch();
     const careers = useSelector(({careers}) => careers.current_careers.data);
     const categories = useSelector(({careers}) => careers.current_careers.categories);
-
+    const user = useSelector(({auth}) => auth.user);
     const classes = useStyles(props);
     const theme = useTheme();
     const [filteredData, setFilteredData] = useState(null);
@@ -231,6 +232,19 @@ function Careers(props)
                                                         >
                                                             View
                                                         </Button>
+                                                        {
+                                                        (FuseUtils.hasPermission(authRoles.officials, user.role))
+                                                         &&
+                                                            <Button
+                                                            className="justify-start px-32"
+                                                            color="danger"
+                                                            to={{ pathname: `/students-point/career-point/update/${career.id}`, state: { career: career.title, prevPath: window.location.pathname} }}
+                                                            component={Link}
+                                                            >
+                                                                Update
+                                                            </Button>
+                                                        }
+                                                        
                                                     </CardActions>
                                                 </Card>
                                             </div>

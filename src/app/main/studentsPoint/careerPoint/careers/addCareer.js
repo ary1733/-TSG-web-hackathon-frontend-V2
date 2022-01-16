@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button,  TextField, Icon, Typography, Select, OutlinedInput, MenuItem} from '@material-ui/core';
+import {Button,  TextField, Icon, Typography, Select, OutlinedInput, MenuItem, InputLabel} from '@material-ui/core';
 import {FuseAnimate, FusePageCarded, OutlinedDiv } from '@fuse';
 import {useForm} from '@fuse/hooks';
 import {Link} from 'react-router-dom';
@@ -19,24 +19,22 @@ function AddCareer(props)
     const categories = useSelector(({user}) => user.current_careers.categories);
     
     const {form, handleChange, setForm} = useForm();
-    const [attachment, setattachment] = useState(null);
 
     useEffect(() => {
-        function updatecomplaintState()
+        dispatch(Actions.getCategories());
+    }, [dispatch]);
+
+    useEffect(() => {
+        if(!career.data)
         {
             dispatch(Actions.newcomplaint());
+            setForm(career.data);
         }
-        dispatch(Actions.getCategories());
-        updatecomplaintState();
-    }, [dispatch, props.match.params]);
-
-    useEffect(() => {
         if (career.data && !form)
         {
             setForm(career.data);
-            console.log(career.data)
         }
-    }, [form, career.data, setForm]);
+    }, [form, career.data, setForm, career.reset]);
 
 
     function handleUploadChange(e)
@@ -182,6 +180,9 @@ function AddCareer(props)
                                 helperText={form.location && form.location.length > 0 ?form.location.length <= 40 ?"":"Max 40 characters allowed":"Location cannot be empty"}
                                 fullWidth
                             />
+                            <InputLabel htmlFor="category-label-placeholder">
+                                Category
+                            </InputLabel>
                             <Select
                                 className="mt-8 mb-16"
                                 id = "type"

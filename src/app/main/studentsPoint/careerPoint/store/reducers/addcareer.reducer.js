@@ -12,7 +12,16 @@ const complaintReducer = function (state = initialState, action) {
         {
             return {
                 ...state,
-                data: action.payload
+                data: action.payload,
+                reset: false
+            };
+        }
+        case Actions.RESET_Complaint:
+        {
+            return {
+                ...state,
+                data: action.payload,
+                reset: true
             };
         }
         default:
