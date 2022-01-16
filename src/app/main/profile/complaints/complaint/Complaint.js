@@ -52,17 +52,20 @@ function Complaint(props)
 {
     const dispatch = useDispatch();
     const complaint = useSelector(({user}) => user.complaint);
-    const complaintId = props.location.pathname.split('/').at(-1);
     const user = useSelector(({auth}) => auth.user);
-
+    let complaintId = 'new';
     const classes = useStyles(props);
     const [tabValue, setTabValue] = useState(0);
     const {form, handleChange, setForm} = useForm(null);
     const [attachment, setattachment] = useState(null);
 
     useEffect(() => {
-        function updatecomplaintState()
+        const updatecomplaintState = async ()=>
         {
+            console.log('here');
+            const {Id} = props.match.params;
+            complaintId = Id;
+            console.log(complaintId);
             if ( complaintId === 'new' )
             {
                 dispatch(Actions.newcomplaint(), complaintId);
@@ -77,12 +80,12 @@ function Complaint(props)
     }, [dispatch, props.match.params]);
 
     useEffect(() => {
-        if (complaint.data && !form)
+        if (complaint.data)
         {
             setForm(complaint.data);
-            console.log(complaint.data)
+            console.log(complaint.data);
         }
-    }, [form, complaint.data, setForm]);
+    }, [complaint.data]);
 
     function handleChangeTab(event, tabValue)
     {
@@ -114,7 +117,7 @@ function Complaint(props)
     function canBeSubmitted()
     {
         return (
-            form.description.length > 0 &&
+            form.subject && form.subject.length > 0 && form.description && form.description.length > 0 &&
             !_.isEqual(complaint.data, form)
         );
     }
@@ -223,7 +226,7 @@ function Complaint(props)
                                     onChange={handleChange}
                                     label="Subject"
                                     type="text"
-                                    value={form.subject}
+                                    value={form.subject?form.subject:""}
                                     multiline
                                     rows={1}
                                     InputProps={{
@@ -247,10 +250,28 @@ function Complaint(props)
                                     rows={3}
                                     InputProps={{
                                         readOnly: complaintId != 'new',
-                                      }}
+                                      }}                                    
+                                      error ={form.description && form.description.length > 0?false : true }
+                                      helperText={form.description && form.description.length > 0 ?"":"Description cannot be empty"}
                                     variant="outlined"
                                     fullWidth
                                 />
+                            {complaintId!='new' && <TextField
+                                    className="mt-8 mb-24"
+                                    id="made_by"
+                                    name="Made By"
+                                    onChange={handleChange}
+                                    label="Made By"
+                                    type="text"
+                                    value={form.made_by}
+                                    multiline
+                                    rows={1}
+                                    InputProps={{
+                                        readOnly: complaintId != 'new',
+                                      }}
+                                    variant="outlined"
+                                    fullWidth
+                                />}
 
                                 {complaintId!='new' && <TextField
                                     className="mt-8 mb-24"
@@ -263,7 +284,7 @@ function Complaint(props)
                                     multiline
                                     rows={1}
                                     InputProps={{
-                                        readOnly: user.role!='admin' && user.role!='tsg_offical',
+                                        readOnly: user.role!='admin' && user.role!='tsg_official',
                                       }}
                                     variant="outlined"
                                     fullWidth
@@ -292,7 +313,6 @@ function Complaint(props)
                     </div>
                 )
             }
-            innerScroll
         />
     )
 }

@@ -33,9 +33,6 @@ function EventInfo(props)
     let activeStep = 0;
 
     useEffect(() => {
-        /**
-         * Get the Course Data
-         */
         console.log(props.match.params);
         const {event_id} = props.match.params;
         dispatch(Actions.getEventInfo(event_id));

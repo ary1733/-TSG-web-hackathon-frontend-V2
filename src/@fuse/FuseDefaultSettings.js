@@ -781,7 +781,8 @@ export const defaultThemes = {
         text: darkText,
         primary: {
           light: '#BCC8CD',
-          main: '#204657',
+          // main: '#204657',
+          main: '#6a26cd',
           dark: '#0B202C',
         },
         secondary: {

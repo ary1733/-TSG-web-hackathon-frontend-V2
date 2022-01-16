@@ -1,11 +1,11 @@
 import React from 'react';
 import {FusePageCarded} from '@fuse';
 import withReducer from 'app/store/withReducer';
-import OrdersHeader from './OrdersHeader';
-import OrdersTable from './OrdersTable';
+import ComplaintsHeader from './ComplaintsHeader';
+import ComplaintsTable from './ComplaintsTable';
 import reducer from '../store/reducers';
 
-function Orders()
+function Complaints()
 {
     return (
         <FusePageCarded
@@ -14,14 +14,14 @@ function Orders()
                 header : "min-h-72 h-72 sm:h-136 sm:min-h-136"
             }}
             header={
-                <OrdersHeader/>
+                <ComplaintsHeader/>
             }
             content={
-                <OrdersTable/>
+                <ComplaintsTable/>
             }
             innerScroll
         />
     );
 }
 
-export default withReducer('eCommerceApp', reducer)(Orders);
+export default withReducer('complaints', reducer)(Complaints);

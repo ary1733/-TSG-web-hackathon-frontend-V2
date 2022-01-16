@@ -9,20 +9,27 @@ const rows = [
         align         : 'left',
         disablePadding: false,
         label         : 'Item',
-        sort          : true
+        sort          : false
     },
     {
         id            : 'subject',
         align         : 'left',
         disablePadding: false,
         label         : 'Subject',
-        sort          : true
+        sort          : false
     },
     {
         id            : 'date',
         align         : 'left',
         disablePadding: false,
         label         : 'Date',
+        sort          : true
+    },
+    {
+        id            : 'made_by',
+        align         : 'left',
+        disablePadding: false,
+        label         : 'Made By',
         sort          : true
     }
 ];
@@ -33,28 +40,28 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function OrdersTableHead(props)
+function ComplaintsTableHead(props)
 {
     const classes = useStyles(props);
-    const [selectedOrdersMenu, setSelectedOrdersMenu] = useState(null);
+    const [selectedComplaintsMenu, setSelectedComplaintsMenu] = useState(null);
 
     const createSortHandler = property => event => {
         props.onRequestSort(event, property);
     };
 
-    function openSelectedOrdersMenu(event)
+    function openSelectedComplaintsMenu(event)
     {
-        setSelectedOrdersMenu(event.currentTarget);
+        setSelectedComplaintsMenu(event.currentTarget);
     }
 
-    function closeSelectedOrdersMenu()
+    function closeSelectedComplaintsMenu()
     {
-        setSelectedOrdersMenu(null);
+        setSelectedComplaintsMenu(null);
     }
 
     function removeSelectedComplaints()
     {
-        console.log(selectedOrdersMenu);
+        console.log(selectedComplaintsMenu);
     }
     // const {onSelectAllClick, order, orderBy, numSelected, rowCount} = props;
 
@@ -69,7 +76,7 @@ function OrdersTableHead(props)
                             padding={row.disablePadding ? 'none' : 'default'}
                             sortDirection={props.order.id === row.id ? props.order.direction : false}
                         >
-                            {row.sort && (
+                            {row.sort?(
                                 <Tooltip
                                     title="Sort"
                                     placement={row.align === "right" ? 'bottom-end' : 'bottom-start'}
@@ -83,7 +90,9 @@ function OrdersTableHead(props)
                                         {row.label}
                                     </TableSortLabel>
                                 </Tooltip>
-                            )}
+                            ):
+                                row.label
+                            }
                         </TableCell>
                     );
                 }, this)}
@@ -92,4 +101,4 @@ function OrdersTableHead(props)
     );
 }
 
-export default OrdersTableHead;
+export default ComplaintsTableHead;

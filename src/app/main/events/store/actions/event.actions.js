@@ -12,8 +12,14 @@ export const GET_Achievement = '[achievements] GET achievement';
 export function saveevent(data)
 {
     const form = new FormData();
-    for (let key in data)
-        form.append(key, data[key]);
+    for (let key in data){
+        if (Array.isArray(data[key]))
+            form.append(key, JSON.stringify(data[key]))
+        else
+            form.append(key, data[key]);
+        console.log(key, data[key]);
+    }
+    console.log(form.timeline);
     form.append("attachment", data.attachment);
     const request = fetch('/api/events/add', {
         method: 'POST',

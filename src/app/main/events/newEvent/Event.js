@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Button, Tab, Tabs, TextField, InputAdornment, Icon, Typography, Grid} from '@material-ui/core';
 import {orange} from '@material-ui/core/colors';
 import {makeStyles} from '@material-ui/styles';
-import {FuseAnimate, FusePageCarded, FuseChipSelect, FuseUtils, OutlinedDiv, TextFieldFormsy} from '@fuse';
+import {FuseAnimate, FusePageCarded, FuseChipSelect, FuseUtils, OutlinedDiv, TextFieldFormsy, Multi_select_text} from '@fuse';
 import {useForm} from '@fuse/hooks';
 import { FormControl } from '@material-ui/core';
 import { MenuItem } from '@material-ui/core';
@@ -23,7 +23,7 @@ import {
     MuiPickersUtilsProvider,
     KeyboardDateTimePicker
   } from '@material-ui/pickers';
-import { formatDistance } from 'date-fns/locale/af';
+import { date, formatDistance } from 'date-fns/locale/af';
 
 const useStyles = makeStyles(theme => ({
     eventImageFeaturedStar: {
@@ -63,14 +63,13 @@ const useStyles = makeStyles(theme => ({
 function Event(props)
 {
     const dispatch = useDispatch();
-    const event = useSelector(({user}) => user.event);
+    const event = useSelector(({newEvent}) => newEvent.event);
     const eventId = props.location.pathname.split('/').at(-1);
     const user = useSelector(({auth}) => auth.user);
 
     const classes = useStyles(props);
     const [tabValue, setTabValue] = useState(0);
     const {form, handleChange, setForm} = useForm(null);
-    const [attachment, setattachment] = useState(null);
 
     useEffect(() => {
         function updateeventState()
@@ -85,7 +84,7 @@ function Event(props)
         if (event.data && !form)
         {
             setForm(event.data);
-            console.log(event.data)
+            console.log(event.data);
         }
     }, [form, event.data, setForm]);
 
@@ -136,7 +135,7 @@ function Event(props)
     function canBeSubmitted()
     {
         return (
-            !_.isEqual(event.data, form)
+            form.title && form.title.length > 0 && form.type && form.type.length > 0 && form.tag && form.tag.length > 0 && form.start && form.end
         );
     }
 
@@ -210,37 +209,7 @@ function Event(props)
                         (
                             <div id="event-form">
                                 
-                                {eventId!='new' && <TextField
-                                    className="mt-8 mb-16"
-                                    id="date"
-                                    name="date"
-                                    onChange={handleChange}
-                                    label="Date"
-                                    type="text"
-                                    value={`${new Date(form.date).toDateString()} ${moment(form.date).format('HH:mm:ss')}`}
-                                    multiline
-                                    rows={1}
-                                    InputProps={{
-                                        readOnly: eventId != 'new',
-                                      }}
-                                    variant="outlined"
-                                    fullWidth
-                                />}
-                                <FormControl fullWidth variant='outlined'>
-                                    <InputLabel >Event Type</InputLabel>
-                                    <Select
-                                        name="type"
-                                        type="text"
-                                        value={form.type}
-                                        label="text"//doubt
-                                        onChange={handleChange}
-                                    >
-                                        <MenuItem value={"Technology"}>Technology</MenuItem>
-                                        <MenuItem value={"Social and Culture"}>Social and Culture</MenuItem>
-                                        <MenuItem value={"Sports and Games"}>Sports and Games</MenuItem>
-                                        <MenuItem value={"Student's Welfare"}>Student's Welfare</MenuItem>
-                                    </Select>
-                                </FormControl>
+                            
 
                                 <TextField
                                     className="mt-8 mb-16"
@@ -249,12 +218,12 @@ function Event(props)
                                     onChange={handleChange}
                                     label="Title"
                                     type="text"
-                                    value={form.title}
+                                    value={form.title?form.title:""}
                                     multiline
                                     rows={1}
-                                    variant="outlined"
-                                    error ={form.title && form.title.length > 0 && form.title.length <= 100 ? false : true }
-                                    helperText={form.title && form.title.length > 0 ?form.title.length <= 100 ?"":"Max 100 characters allowed":"Title cannot be empty"}
+                                    variant="outlined"                                      
+                                    error ={form.title && form.title.length > 0?false : true }
+                                    helperText={form.title && form.title.length > 0 ?"":"Title cannot be empty"}
                                     fullWidth
                                 />
 
@@ -265,7 +234,7 @@ function Event(props)
                                     onChange={handleChange}
                                     label="Introduction"
                                     type="text"
-                                    value={form.introduction}
+                                    value={form.introduction?form.introduction:""}
                                     multiline
                                     rows={3}
                                     variant="outlined"
@@ -279,20 +248,7 @@ function Event(props)
                                     onChange={handleChange}
                                     label="Procedure"
                                     type="text"
-                                    value={form.procedure}
-                                    multiline
-                                    rows={3}
-                                    variant="outlined"
-                                    fullWidth
-                                />
-                                <TextField
-                                    className="mt-8 mb-16"
-                                    id="judge_criteria"
-                                    name="judge_criteria"
-                                    onChange={handleChange}
-                                    label="Judge Criteria"
-                                    type="text"
-                                    value={form.judge_criteria}
+                                    value={form.procedure?form.procedure:""}
                                     multiline
                                     rows={3}
                                     variant="outlined"
@@ -300,6 +256,40 @@ function Event(props)
                                 />
 
                                 <TextField
+                                    className="mt-8 mb-16"
+                                    id="judge_criteria"
+                                    name="judge_criteria"
+                                    onChange={handleChange}
+                                    label="Judge Criteria"
+                                    type="text"
+                                    value={form.judge_criteria?form.judge_criteria:""}
+                                    multiline
+                                    rows={3}
+                                    variant="outlined"
+                                    fullWidth
+                                />
+                                
+                                <FuseChipSelect
+                                    className="mt-8 mb-16"
+                                    value={
+                                        form.timeline && form.timeline.map(item => ({
+                                            value: item,
+                                            label: item
+                                        }))
+                                    }
+                                    onChange={(value) => handleChipChange(value, 'timeline')}
+                                    placeholder="Enter timeline"
+                                    textFieldProps={{
+                                        label          : 'Timeline',
+                                        InputLabelProps: {
+                                            shrink: true
+                                        },
+                                        variant        : 'outlined'
+                                    }}
+                                    isMulti
+                                />
+
+                                {/* <TextField
                                     className="mt-8 mb-16"
                                     id="timeline"
                                     name="timeline"
@@ -311,7 +301,7 @@ function Event(props)
                                     rows={3}
                                     variant="outlined"
                                     fullWidth
-                                />
+                                /> */}
 
                                 <TextField
                                     className="mt-8 mb-16"
@@ -320,22 +310,40 @@ function Event(props)
                                     onChange={handleChange}
                                     label="Venue"
                                     type="text"
-                                    value={form.venue}
+                                    value={form.venue?form.venue:""}
                                     multiline
                                     rows={2}
                                     variant="outlined"
-                                    error ={((form.venue?false:true) || form.venue.length <= 200 ? false : true )}
-                                    helperText={(form.venue?false:true) || form.venue.length <= 200 ?"":"Max 200 characters allowed"}
                                     fullWidth
                                 />
+                            
+                            <FormControl 
+                                fullWidth 
+                                variant='outlined' 
+                                className="mt-8 mb-16"
+                                error ={form.type?false : true }>
+                                    <InputLabel >Event Type</InputLabel>
+                                    <Select className="pl-5"
+                                        name="type"
+                                        type="radio"
+                                        value={form.type?form.type:""}
+                                        label="Event Type"//doubt
+                                        onChange={handleChange}
+                                    >
+                                        <MenuItem value={"Technology"}>Technology</MenuItem>
+                                        <MenuItem value={"Social and Culture"}>Social and Culture</MenuItem>
+                                        <MenuItem value={"Sports and Games"}>Sports and Games</MenuItem>
+                                        <MenuItem value={"Student's Welfare"}>Student's Welfare</MenuItem>
+                                    </Select>
+                            </FormControl>
 
-                                <FormControl fullWidth variant='outlined' className="mt-8 mb-16">
+                                <FormControl fullWidth variant='outlined' className="mt-8 mb-16" error ={form.tag?false : true }>
                                     <InputLabel >Event Tag</InputLabel>
-                                    <Select
+                                    <Select className="pl-5"
                                         name="tag"
-                                        type="text"
-                                        value={form.tag}
-                                        label="text"//doubt
+                                        type="radio"
+                                        value={form.tag?form.tag:""}
+                                        label="Event Tag"//doubt
                                         onChange={handleChange}
                                     >
                                         <MenuItem value={"Inter IIT"}>Inter IIT</MenuItem>
@@ -344,59 +352,43 @@ function Event(props)
                                     </Select>
                                 </FormControl>
 
-                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                    <KeyboardDateTimePicker 
-                                    label = "Material Date Picker"
-                                    value = {form.start}
-                                    onChange = {handleDateChangeStart}
-                                    />
+                                <div className="mt-8 mb-16 pl-5">
+                                    <MuiPickersUtilsProvider utils={DateFnsUtils} fullWidth >
+                                            <KeyboardDateTimePicker 
+                                            label = "Start"
+                                            value = {form.start?form.start:""}
+                                            onChange = {handleDateChangeStart}
+                                            />  
+                                    </MuiPickersUtilsProvider>
+                                </div>
+
+                                <div className="mt-8 mb-16 pl-5">
+                                    <MuiPickersUtilsProvider utils={DateFnsUtils} fullWidth>
+                                        <KeyboardDateTimePicker 
+                                        label = "End"
+                                        value = {form.end?form.end:""}
+                                        onChange = {handleDateChangeEnd}
+                                        />
                                 </MuiPickersUtilsProvider>
+                                </div>
 
-                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                    <KeyboardDateTimePicker 
-                                    label = "End date and time of the event"
-                                    value = {form.end}
-                                    onChange = {handleDateChangeEnd}
+                                <OutlinedDiv label="Poster" className="mt-8 mb-16">
+                                    <input
+                                        // className="hidden"
+                                        id="poster"
+                                        type="file"
+                                        name="poster"
+                                        onChange={handleUploadChange}
                                     />
-                                </MuiPickersUtilsProvider>
-
-
-
-                                {/* <TextField
-                                    className="mt-8 mb-16"
-                                    id="description"
-                                    name="description"
-                                    onChange={handleChange}
-                                    label="Description"
-                                    type="text"
-                                    value={form.description}
-                                    multiline
-                                    rows={3}
-                                    variant="outlined"
-                                    fullWidth
-                                /> */}
-
-
-                                    {
-                                        <OutlinedDiv label="Poster">
-                                            <input
-                                                // className="hidden"
-                                                id="poster"
-                                                type="file"
-                                                name="poster"
-                                                onChange={handleUploadChange}
-                                            />
-                                        </OutlinedDiv>
-                                    }
+                                </OutlinedDiv>
 
                             </div>
                         )}
                     </div>
                 )
             }
-            innerScroll
         />
     )
 }
 
-export default withReducer('user', reducer)(Event);
+export default withReducer('newEvent', reducer)(Event);

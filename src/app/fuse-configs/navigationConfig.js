@@ -25,6 +25,13 @@
                         'auth' : authRoles.loggedIn,
                         'children': [
                             {
+                                'id'   : 'all-complaints',
+                                'title': 'View Complaints',
+                                'type' : 'item',
+                                'url'  : '/profile/complaints/all',
+                                'auth' : authRoles.loggedIn
+                            },
+                            {
                                 'id'   : 'add-complaints',
                                 'title': 'New Complaint',
                                 'type' : 'item',
@@ -46,6 +53,13 @@
                     'fg'   : '#FFFFFF'
                 },
         'children': [
+            {
+                'id'   : 'new-event',
+                'title': 'New Event',
+                'type' : 'item',
+                'url'  : '/events/new',
+                'auth' : authRoles.officials
+            },
             {
                 'id'   : 'upcoming-events',
                 'title': 'Upcoming Events',
