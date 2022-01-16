@@ -10,8 +10,13 @@ export const careerEventConfig = {
     },
     routes  : [
         {
-            path     : '/students-point/career-point',
+            path     : '/students-point/career-point/new',
+            component: React.lazy(() => import('./careers/addCareer'))
+        },
+        {
+            path     : '/students-point/career-point/view',
             component: React.lazy(() => import('./careers/careers'))
-        }
+        },
+        
     ]
 };

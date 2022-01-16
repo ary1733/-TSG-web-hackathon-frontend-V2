@@ -205,6 +205,7 @@ function Careers(props)
                                                         <Typography className="text-center text-16 font-400">{career.title}</Typography>
                                                         <Typography className="text-center text-13 font-600 mt-4" color="textSecondary">Location - {career.location}</Typography>
                                                         <Typography className="text-center text-13 font-600 mt-4" color="textSecondary">Job Profile - {career.jobprofile}</Typography>
+                                                        <Typography className="text-center text-13 font-600 mt-4" color="textSecondary">Uploaded by - {career.uploadedby}</Typography>
                                                     </CardContent>
                                                     <Divider/>
                                                     <CardActions className="justify-center">
@@ -217,10 +218,11 @@ function Careers(props)
                                                                 method: 'GET',
                                                                 responseType: 'blob', // important
                                                             }).then((response) => {
+                                                                console.log(response)
                                                                 const url = window.URL.createObjectURL(new Blob([response.data]));
                                                                 const link = document.createElement('a');
                                                                 link.href = url;
-                                                                link.setAttribute('download', `${career.title}.pdf`); //or any other extension
+                                                                link.setAttribute('download', `${career.title}_${career.jobprofile}.pdf`); //or any other extension
                                                                 document.body.appendChild(link);
                                                                 link.click();
                                                             });}}

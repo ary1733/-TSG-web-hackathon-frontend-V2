@@ -35,7 +35,7 @@ export function getCategories()
         },
         {
             'id'   : 2,
-            'value': 'Sports and Games',// TODO
+            'value': 'Data',
             'label': 'Data',
             'color': "#5fff56"
         },

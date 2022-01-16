@@ -84,11 +84,27 @@
                 'type' : 'item',
                 'url'  : '/students-point/academic-point'
             },
+
             {
-                'id'   : 'career-point',
-                'title': 'Career Point',
-                'type' : 'item',
-                'url'  : '/students-point/career-point'
+                'id'   : 'complaints',
+                'title': 'Careers',
+                'type' : 'collapse',
+                'auth' : authRoles.loggedIn,
+                'children': [
+                    {
+                        'id'   : 'career-point',
+                        'title': 'Career Point',
+                        'type' : 'item',
+                        'url'  : '/students-point/career-point/view'
+                    },
+                    {
+                        'id'   : 'add-career-point',
+                        'title': 'Add Career',
+                        'type' : 'item',
+                        'url'  : '/students-point/career-point/new'
+                    }
+                ]
+                
             }
         ]
     }
