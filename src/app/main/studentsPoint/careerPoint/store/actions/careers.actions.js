@@ -1,3 +1,4 @@
+import { showMessage } from 'app/store/actions';
 import axios from 'axios';
 
 export const GET_CURRENT = '[CAREERS] GET_CURRENT';
@@ -70,4 +71,23 @@ export function getCategories()
                 type   : GET_CATEGORIES,
                 payload: categories
             })
+}
+
+
+export function deleteCareer(careerid)
+{
+    console.log(careerid)
+    const request = axios.post('api/careers/delete/', {'careerid': careerid});
+    // console.log(request)
+    // returns remaining items
+    return (dispatch) =>
+        request.then((response) =>{
+            console.log(response);
+            dispatch(showMessage({message: 'Career Deleted'}));
+            dispatch({
+                type   : GET_CURRENT,
+                payload: response.data.careers
+            })
+        }
+        );
 }

@@ -236,12 +236,12 @@ function Careers(props)
                                                         (FuseUtils.hasPermission(authRoles.officials, user.role))
                                                          &&
                                                             <Button
-                                                            className="justify-start px-32"
-                                                            color="danger"
-                                                            to={{ pathname: `/students-point/career-point/update/${career.id}`, state: { career: career.title, prevPath: window.location.pathname} }}
-                                                            component={Link}
+                                                            className="justify-start px-32 text-red"
+                                                            // to={{ pathname: `/students-point/career-point/update/${career.id}`, state: { career: career.title, prevPath: window.location.pathname} }}
+                                                            // component={Link}
+                                                            onClick={()=>dispatch(Actions.deleteCareer(career.id))}
                                                             >
-                                                                Update
+                                                                Delete
                                                             </Button>
                                                         }
                                                         
