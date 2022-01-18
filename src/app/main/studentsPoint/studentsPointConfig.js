@@ -1,9 +1,11 @@
 import { authRoles } from 'app/auth';
 import React from 'react'
+import { academicEventConfig } from './academicPoint/academicPointConfig';
 import { careerEventConfig } from './careerPoint/careerPointConfig';
 
 export const studentsPointConfig = [
     careerEventConfig,
+    academicEventConfig,
     {
     settings: {
         layout: {
@@ -13,10 +15,6 @@ export const studentsPointConfig = [
     },
     auth    : authRoles.loggedIn, // makes the route visible only for logged in
     routes  : [
-        {
-            path     : '/students-point/academic-point',
-            component: React.lazy(() => import('./academicPoint/AcademicPoint'))
-        },
         {
             path     : '/students-point',
             component: React.lazy(() => import('./StudentsPoint'))
