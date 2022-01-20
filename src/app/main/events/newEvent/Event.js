@@ -348,7 +348,7 @@ function Event(props)
                                     >
                                         <MenuItem value={"Inter IIT"}>Inter IIT</MenuItem>
                                         <MenuItem value={"General Championship"}>General Championship</MenuItem>
-                                        <MenuItem value={"None"}>None</MenuItem>
+                                        <MenuItem value={"Other"}>Other</MenuItem>
                                     </Select>
                                 </FormControl>
 

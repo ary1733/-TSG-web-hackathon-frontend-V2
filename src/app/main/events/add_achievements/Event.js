@@ -154,7 +154,7 @@ function Event(props)
                         <div className="flex flex-col items-start max-w-full">
 
                             <FuseAnimate animation="transition.slideRightIn" delay={300}>
-                                <Typography className="normal-case flex items-center sm:mb-12" component={Link} role="button" to="/profile/events" color="inherit">
+                                <Typography className="normal-case flex items-center sm:mb-12" component={Link} role="button" to={(props.location.state && props.location.state.prevPath)?props.location.state.prevPath:'/'} color="inherit">
                                     <Icon className="mr-4 text-20">arrow_back</Icon>
                                     events
                                 </Typography>
@@ -218,14 +218,14 @@ function Event(props)
                                     id="winner_email"
                                     name="winner_email"
                                     onChange={handleChange}
-                                    label="winner_email"
+                                    label="Winner Email"
                                     type="text"
                                     value={form.winner_email}
                                     multiline
                                     rows={1}
                                     variant="outlined"
-                                    error ={(form.winner_email ? false : true )}
-                                    helperText={(form.winner_email?false:true)?"email cannot be empty":""}
+                                    error ={(form.winner_email && form.winner_email.length > 0? false : true )}
+                                    helperText={(form.winner_email && form.winner_email.length > 0 ?false:true)?"email cannot be empty":""}
                                     fullWidth
                                 />
 {/* event id to be done */}
@@ -234,14 +234,14 @@ function Event(props)
                                     id="position"
                                     name="position"
                                     onChange={handleChange}
-                                    label="position"
+                                    label="Position"
                                     type="text"
                                     value={form.position}
                                     multiline
                                     rows={1}
                                     variant="outlined"
-                                    error ={(form.position ? false : true )}
-                                    helperText={(form.position?false:true) ?"position cannot be empty":""}
+                                    error ={(form.position && form.position.length > 0 && !isNaN(parseInt(form.position))? false : true )}
+                                    helperText={(form.position && form.position.length > 0?(isNaN(parseInt(form.position))?"Enter a integer value":""):"Position cannot be empty")}
                                     fullWidth
                                 />
 
