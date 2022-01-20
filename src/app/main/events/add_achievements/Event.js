@@ -225,7 +225,7 @@ function Event(props)
                                     rows={1}
                                     variant="outlined"
                                     error ={(form.winner_email && form.winner_email.length > 0? false : true )}
-                                    helperText={(form.winner_email && form.winner_email.length > 0 ?false:true)?"email cannot be empty":""}
+                                    helperText={(form.winner_email && form.winner_email.length > 0 ?false:true)?"Email cannot be empty":""}
                                     fullWidth
                                 />
 {/* event id to be done */}
