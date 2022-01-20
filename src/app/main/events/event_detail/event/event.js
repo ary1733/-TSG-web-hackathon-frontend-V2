@@ -124,9 +124,14 @@ function EventInfo(props)
                                         <Typography className={pClasses} id="organiser">{event.organiser}</Typography>
                                     </div>
                                     <div className='relative -bottom-20'>
-                                    <Button variant="contained" href={event.report} target='_blank' className='bg-indigo-darker hover:bg-indigo text-white text-lg mt-20 absolute right-0 bottom-0' >
+                                    {event.report && <Button variant="contained" href={event.report} target='_blank' className='bg-indigo-darker hover:bg-indigo text-white text-lg mt-20 absolute right-0 bottom-0' >
                                         Download Report
-                                    </Button>
+                                    </Button>}
+                                    <Link to={{pathname:`/add_achievement/${props.match.params.event_id}`, state: {prevPath: window.location.pathname}}}>
+                                        <Button variant="contained"  className='bg-indigo-darker hover:bg-indigo text-white text-lg' >
+                                            Add achievement
+                                        </Button>
+                                    </Link>
                                 </div>
                                 </Paper>
                             </div>
