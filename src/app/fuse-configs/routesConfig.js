@@ -6,11 +6,14 @@ import LoginPage from 'app/main/login/LoginPage';
 import { LoginConfig } from 'app/main/login/LoginConfig';
 import { EventsConfig } from 'app/main/events/EventsConfig';
 import { profileConfig} from 'app/main/profile/profleConfig';
+import { studentsPointConfig } from 'app/main/studentsPoint/studentsPointConfig';
+
 
 const routeConfigs = [
     LoginConfig,
     ...EventsConfig,
-    ...profileConfig
+    ...profileConfig,
+    ...studentsPointConfig
 ];
 
 const routes = [

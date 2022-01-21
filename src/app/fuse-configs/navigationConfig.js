@@ -79,6 +79,62 @@
                 'url'  : '/events/results'
             }
         ]
+    },
+    {
+        'id'   : 'studentspoint',
+                'title': "Students\' Point",
+                'type' : 'collapse',
+                'icon' : 'school',
+                'badge'   : {
+                    'title': 3,
+                    'bg'   : '#525E8A',
+                    'fg'   : '#FFFFFF'
+                },
+                'auth' : authRoles.loggedIn,
+                'children': [
+                    {
+                        'id'   : 'academics',
+                        'title': 'Academics',
+                        'type' : 'collapse',
+                        'auth' : authRoles.loggedIn,
+                        'children': [
+                            {
+                                'id'   : 'academic-point',
+                                'title': 'Academic Point',
+                                'type' : 'item',
+                                'url'  : '/students-point/academic-point/view'
+                            },
+                            {
+                                'id'   : 'add-academic-point',
+                                'title': 'Add Academic',
+                                'type' : 'item',
+                                'url'  : '/students-point/academic-point/new'
+                            }
+                        ]
+                        
+                    }
+                    ,
+                    {
+                        'id'   : 'careers',
+                        'title': 'Careers',
+                        'type' : 'collapse',
+                        'auth' : authRoles.loggedIn,
+                        'children': [
+                            {
+                                'id'   : 'career-point',
+                                'title': 'Career Point',
+                                'type' : 'item',
+                                'url'  : '/students-point/career-point/view'
+                            },
+                            {
+                                'id'   : 'add-career-point',
+                                'title': 'Add Career',
+                                'type' : 'item',
+                                'url'  : '/students-point/career-point/new'
+                            }
+                        ]        
+                    }
+        ]
     }
 ];
 
