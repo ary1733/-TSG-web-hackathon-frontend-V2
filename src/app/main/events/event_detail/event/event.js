@@ -138,16 +138,19 @@ function EventInfo(props)
                                         <Typography className={pClasses} id="organiser">{event.organiser}</Typography>
                                     </div>
                                     <div className='relative -bottom-20'>
-                                    <OutlinedDiv label="Update Report">
-                                        <input
-                                            // className="hidden"
-                                            id="attachment"
-                                            type="file"
-                                            name="attachment"
-                                            onChange={handleUploadChange}
-                                        />
-                                        <Button onClick={uploadReport} disabled={!report}>update</Button>
-                                    </OutlinedDiv>
+                                    {
+                                        authRoles.organisers.includes(user.role) && 
+                                        <OutlinedDiv label="Update Report">
+                                            <input
+                                                // className="hidden"
+                                                id="attachment"
+                                                type="file"
+                                                name="attachment"
+                                                onChange={handleUploadChange}
+                                            />
+                                            <Button onClick={uploadReport} disabled={!report}>update</Button>
+                                        </OutlinedDiv>
+                                    }
                                     {event.report && <Button variant="contained" href={event.report} target='_blank' className='bg-indigo-darker hover:bg-indigo text-white text-lg float-right' >
                                         Download Report
                                     </Button>}
