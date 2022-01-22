@@ -1,6 +1,6 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Paper, Hidden, Icon, IconButton, Fab, Typography, Stepper, Step, StepLabel} from '@material-ui/core';
-import {FusePageSimple, FuseScrollbars} from '@fuse';
+import {FusePageSimple, FuseScrollbars, OutlinedDiv} from '@fuse';
 import {useDispatch, useSelector} from 'react-redux';
 import withReducer from 'app/store/withReducer';
 import SwipeableViews from 'react-swipeable-views';
@@ -12,6 +12,7 @@ import {makeStyles} from '@material-ui/styles';
 import moment from 'moment';
 import jwtService from 'app/services/jwtService';
 import { Button } from '@material-ui/core';
+import { authRoles } from "app/auth";
 
 const useStyles = makeStyles(theme => ({
     stepLabel : {
@@ -27,15 +28,17 @@ function EventInfo(props)
 {
     const dispatch = useDispatch();
     const event = useSelector(({Events}) => Events.event);
+    const [report, setreport] = useState(null);
+    const user = useSelector(({auth}) => auth.user);
     const contents = ["poster", "introduction", "procedure", "jugde_criteria", "timeline", "venue", "organiser", "report"];
     const classes = useStyles(props);
     const pageLayout = useRef(null);
     let activeStep = 0;
 
     useEffect(() => {
-        console.log(props.match.params);
         const {event_id} = props.match.params;
         dispatch(Actions.getEventInfo(event_id));
+        dispatch(Actions.getAchievements(event_id));
     }, [dispatch, props.match.params]);
 
     const handleScroll = e => {
@@ -44,6 +47,17 @@ function EventInfo(props)
           activeStep += 1;
         }
       }
+
+    function handleUploadChange(e)
+    {
+        const file = e.target.files[0];
+        setreport(file);
+    }
+
+    const uploadReport = () =>{
+        const {event_id} = props.match.params;
+        dispatch(Actions.uploadReport(report, event_id));
+    }
 
     const headingClasses = "text-3xl font-bold text-indigo-light";
     const pClasses = "text-xl mb-10 font-semibold text-white";
@@ -92,7 +106,7 @@ function EventInfo(props)
                             >
                             <div className="flex justify-center p-10 pb-64 sm:pb-64 md:pb-64">  
                                 <Paper className="w-full max-w-lg rounded-8 p-16 md:p-24" elevation={1}>
-                                <div className="pb-20 "><img className="rounded-8 object-fill mx-auto" src={event.poster} /></div>
+                                    {event.poster && <div className="pb-20 "><img className="rounded-8 object-fill mx-auto" src={event.poster} /></div>}
                                     <div className='mb-5'>
                                         <Typography className={headingClasses}>Introduction</Typography>
                                         <Typography className={pClasses} id="introduction" >{event.introduction}</Typography>
@@ -109,7 +123,7 @@ function EventInfo(props)
                                         <Typography className={headingClasses}>Timeline</Typography>
                                         <ul>
                                         {
-                                            event.timeline.map((miniEvent)=>{
+                                            event.timeline && event.timeline.map((miniEvent)=>{
                                                 return <li className={listElementsClasses} key={miniEvent}>{miniEvent}</li>
                                             })
                                         }
@@ -120,18 +134,40 @@ function EventInfo(props)
                                         <Typography className={pClasses} id="venue">{event.venue}</Typography>
                                     </div>
                                     <div className='mb-5'>
-                                        <Typography className={headingClasses}>Organiser</Typography>
+                                        <Typography className={headingClasses}>Posted By</Typography>
                                         <Typography className={pClasses} id="organiser">{event.organiser}</Typography>
                                     </div>
                                     <div className='relative -bottom-20'>
-                                    {event.report && <Button variant="contained" href={event.report} target='_blank' className='bg-indigo-darker hover:bg-indigo text-white text-lg mt-20 absolute right-0 bottom-0' >
+                                    <OutlinedDiv label="Update Report">
+                                        <input
+                                            // className="hidden"
+                                            id="attachment"
+                                            type="file"
+                                            name="attachment"
+                                            onChange={handleUploadChange}
+                                        />
+                                        <Button onClick={uploadReport} disabled={!report}>update</Button>
+                                    </OutlinedDiv>
+                                    {event.report && <Button variant="contained" href={event.report} target='_blank' className='bg-indigo-darker hover:bg-indigo text-white text-lg float-right' >
                                         Download Report
                                     </Button>}
-                                    <Link to={{pathname:`/add_achievement/${props.match.params.event_id}`, state: {prevPath: window.location.pathname}}}>
-                                        <Button variant="contained"  className='bg-indigo-darker hover:bg-indigo text-white text-lg' >
-                                            Add achievement
-                                        </Button>
-                                    </Link>
+                                    <div className='mb-5' id="Results">
+                                        <Typography className={headingClasses}>Results</Typography>
+                                        <ul>
+                                        {
+                                            event.achievements && event.achievements.map((miniEvent)=>{
+                                                return <li className={listElementsClasses} key={miniEvent.id}>{miniEvent.winner_name} got position {miniEvent.position}</li>
+                                            })
+                                        }
+                                        </ul>
+                                    </div>
+                                    {
+                                        authRoles.organisers.includes(user.role) && <Link to={{pathname:`/add-achievement/${props.match.params.event_id}/${props.match.params.eventTitle}`, state: {prevPath: window.location.pathname}}}>
+                                            <Button variant="contained" className='bg-indigo-darker hover:bg-indigo text-white text-lg -translate-y-20 float-right' >
+                                                Add achievement
+                                            </Button>
+                                        </Link>
+                                    }
                                 </div>
                                 </Paper>
                             </div>

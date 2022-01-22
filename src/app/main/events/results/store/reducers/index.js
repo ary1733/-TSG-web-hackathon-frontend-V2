@@ -1,10 +1,8 @@
 import {combineReducers} from 'redux';
-import courses from './courses.reducer';
-import course from './course.reducer';
+import past_events from './events.reducer';
 
 const reducer = combineReducers({
-    courses,
-    course
+    past_events
 });
 
 export default reducer;

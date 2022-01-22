@@ -10,7 +10,7 @@ export const achievementEventConfig = {
     },
     routes  : [
         {
-            path     : '/add_achievement/:event_id',
+            path     : '/add-achievement/:event_id/:eventTitle',
             component: React.lazy(() => import('./Event'))
         }
     ]

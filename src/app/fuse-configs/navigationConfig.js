@@ -73,10 +73,10 @@
                 'url'  : '/events/current'
             },
             {
-                'id'   : 'Results',
-                'title': 'Results',
+                'id'   : 'past-events',
+                'title': 'Past Events',
                 'type' : 'item',
-                'url'  : '/events/results'
+                'url'  : '/events/past-events'
             }
         ]
     },

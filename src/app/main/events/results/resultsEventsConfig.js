@@ -10,12 +10,8 @@ export const resultsEventsConfig = {
     },
     routes  : [
         {
-            path     : '/events/results/:courseId/:courseHandle?',
-            component: React.lazy(() => import('./course/Course'))
-        },
-        {
-            path     : '/events/results',
-            component: React.lazy(() => import('./courses/Courses'))
+            path     : '/events/past-events',
+            component: React.lazy(() => import('./events/Events'))
         }
     ]
 };

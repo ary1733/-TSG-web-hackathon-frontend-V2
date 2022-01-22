@@ -75,7 +75,7 @@ function Events(props)
                     console.log(item.type, selectedCategory);
                     return false;
                 }
-                return item.title.toLowerCase().includes(searchText.toLowerCase())
+                return item.title.toLowerCase().includes(searchText.toLowerCase()) || item.organiser.toLowerCase().includes(searchText.toLowerCase())
             });
         }
 
@@ -201,7 +201,7 @@ function Events(props)
                                                     <CardContent className="flex flex-col flex-auto items-center justify-center">
                                                         {/* content of events here */}
                                                         <Typography className="text-center text-16 font-400">{event.title}</Typography>
-                                                        <Typography className="text-center text-13 font-600 mt-4" color="textSecondary">Organiser - {event.organiser}</Typography>
+                                                        <Typography className="text-center text-13 font-600 mt-4" color="textSecondary">Posted By - {event.organiser}</Typography>
                                                         <Typography className="text-center text-13 font-600 mt-4" color="textSecondary">Start - {new Date(event.start).toDateString()}, {moment(event.start).format('HH:mm:ss')}</Typography>
                                                         <Typography className="text-center text-13 font-600 mt-4" color="textSecondary">End - {new Date(event.end).toDateString()}, {moment(event.end).format('HH:mm:ss')}</Typography>
                                                     </CardContent>

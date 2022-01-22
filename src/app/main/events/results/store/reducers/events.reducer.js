@@ -5,17 +5,17 @@ const initialState = {
     categories: []
 };
 
-const coursesReducer = function (state = initialState, action) {
+const eventsReducer = function (state = initialState, action) {
     switch ( action.type )
     {
-        case Actions.GET_COURSES:
+        case Actions.GET_PAST_EVENTS:
         {
             return {
                 ...state,
                 data: action.payload
             };
         }
-        case Actions.GET_CATEGORIES:
+        case Actions.GET_RESULT_CATEGORIES:
         {
             return {
                 ...state,
@@ -29,4 +29,4 @@ const coursesReducer = function (state = initialState, action) {
     }
 };
 
-export default coursesReducer;
+export default eventsReducer;

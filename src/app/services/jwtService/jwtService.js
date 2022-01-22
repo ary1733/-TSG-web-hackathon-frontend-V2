@@ -126,7 +126,7 @@ class jwtService extends FuseUtils.EventEmitter {
                     this.setSession(null);
                     this.emit('onAutoLogout', data.message);
                 }else{
-                    console.log('login valid');
+                    // console.log('login valid');
                     this.setSession(response.user_type);
                     this.emit('onAutoLogin', true);
                     resolve(response);
@@ -134,7 +134,7 @@ class jwtService extends FuseUtils.EventEmitter {
                 return data;
             }).
             then(response => {
-                console.log(response);
+                // console.log(response);
             }).catch(error => {
                 reject(error);
             });
@@ -163,10 +163,9 @@ class jwtService extends FuseUtils.EventEmitter {
                 return data;
             }).
             then(response => {
-                console.log(response);
+                // console.log(response);
                 if (response.user)
                 {
-                    console.log("user set");
                     resolve(response.user);
                 }
             }).catch(error => {

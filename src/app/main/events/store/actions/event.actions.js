@@ -44,20 +44,20 @@ export function saveachievement(data)
     const form = new FormData();
     for (let key in data)
         form.append(key, data[key]);
-    form.append("attachment", data.attachment);
+    form.append("certificate", data.attachment);
     const request = fetch('/api/achievement/add', {
         method: 'POST',
         credentials: "include",
         body: form
       })
     return (dispatch) =>
-        request.then((response) => {
-
-                dispatch(showMessage({message: 'achievement Saved'}));
+        request.then(async (response) => {
+                let data = await response.json();
+                dispatch(showMessage({message: data.message}));
 
                 return dispatch({
                     type   : SAVE_Achievement,
-                    payload: response.data
+                    payload: data
                 })
             }
         );

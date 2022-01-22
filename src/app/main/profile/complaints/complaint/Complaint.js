@@ -53,26 +53,25 @@ function Complaint(props)
     const dispatch = useDispatch();
     const complaint = useSelector(({user}) => user.complaint);
     const user = useSelector(({auth}) => auth.user);
-    let complaintId = 'new';
+    const [complaintId, setcomplaintId] = useState('new');
     const classes = useStyles(props);
     const [tabValue, setTabValue] = useState(0);
     const {form, handleChange, setForm} = useForm(null);
     const [attachment, setattachment] = useState(null);
 
     useEffect(() => {
-        const updatecomplaintState = async ()=>
+        const updatecomplaintState = ()=>
         {
-            console.log('here');
             const {Id} = props.match.params;
-            complaintId = Id;
+            setcomplaintId(Id);
             console.log(complaintId);
-            if ( complaintId === 'new' )
+            if ( Id === 'new' )
             {
-                dispatch(Actions.newcomplaint(), complaintId);
+                dispatch(Actions.newcomplaint(), Id);
             }
             else
             {
-                dispatch(Actions.getcomplaint(complaintId));
+                dispatch(Actions.getcomplaint(Id));
             }
         }
 

@@ -64,7 +64,7 @@ function Event(props)
 {
     const dispatch = useDispatch();
     const achievement = useSelector(({user}) => user.event);
-    const eventId = props.location.pathname.split('/').at(-1);
+    const [eventId, seteventId] = useState(null);
     const user = useSelector(({auth}) => auth.user);
 
     const classes = useStyles(props);
@@ -75,7 +75,9 @@ function Event(props)
     useEffect(() => {
         function updateeventState()
         {
-            dispatch(Actions.newachievement(), eventId);
+            const {event_id} = props.match.params;
+            seteventId(event_id);
+            dispatch(Actions.newachievement(), event_id);
         }
 
         updateeventState();
@@ -84,7 +86,7 @@ function Event(props)
     useEffect(() => {
         if (achievement.data && !form)
         {
-            setForm({...achievement.data,event_id:eventId});
+            setForm({...achievement.data,event_id:props.match.params.event_id});
             console.log(form)
         }
     }, [form, achievement.data, setForm]);
