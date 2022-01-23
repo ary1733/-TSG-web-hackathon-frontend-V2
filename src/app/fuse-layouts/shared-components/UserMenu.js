@@ -3,6 +3,7 @@ import {Avatar, Button, Icon, ListItemIcon, ListItemText, Popover, MenuItem, Typ
 import {useSelector, useDispatch} from 'react-redux';
 import * as authActions from 'app/auth/store/actions';
 import {Link} from 'react-router-dom';
+import { authRoles } from 'app/auth';
 
 function UserMenu(props)
 {
@@ -80,7 +81,7 @@ function UserMenu(props)
                     </React.Fragment>
                 ) : (
                     <React.Fragment>
-                        <MenuItem component={Link} to={user.role=="admin" || user.role=="tsg_official"?"/profile/complaints":"/profile/achievements"} onClick={userMenuClose}>
+                        <MenuItem component={Link} to={authRoles.organisers.includes(user.role)?"/profile/complaints":"/profile/achievements"} onClick={userMenuClose}>
                             <ListItemIcon className="min-w-40">
                                 <Icon>account_circle</Icon>
                             </ListItemIcon>
