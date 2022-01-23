@@ -16,7 +16,7 @@ import {
     LinearProgress
 } from '@material-ui/core';
 import {makeStyles, useTheme} from '@material-ui/styles';
-import {FuseAnimate, FuseAnimateGroup} from '@fuse';
+import {FuseAnimate, FuseAnimateGroup, FuseUtils} from '@fuse';
 import {useDispatch, useSelector} from 'react-redux';
 import withReducer from 'app/store/withReducer';
 import clsx from 'clsx';
@@ -24,7 +24,8 @@ import _ from '@lodash';
 import {Link} from 'react-router-dom';
 import * as Actions from '../store/actions';
 import reducer from '../store/reducers';
-import moment from 'moment';
+import moment from 'moment'
+import { authRoles } from 'app/auth';
 
 const useStyles = makeStyles(theme => ({
     header    : {
@@ -48,7 +49,8 @@ function Events(props)
     const dispatch = useDispatch();
     const events = useSelector(({past_events}) => past_events.past_events.data);
     const categories = useSelector(({past_events}) => past_events.past_events.categories);
-
+    const [days, setdays] = useState("60");
+    const user = useSelector(({auth}) => auth.user);
     const classes = useStyles(props);
     const theme = useTheme();
     const [filteredData, setFilteredData] = useState(null);
@@ -56,9 +58,9 @@ function Events(props)
     const [selectedCategory, setSelectedCategory] = useState('all');
 
     useEffect(() => {
-        dispatch(Actions.getPastEvents());
+        dispatch(Actions.getPastEvents(days));
         dispatch(Actions.getResultCategories());
-    }, [dispatch]);
+    }, [dispatch, days]);
 
     useEffect(() => {
         function getFilteredArray()
@@ -93,6 +95,11 @@ function Events(props)
     function handleSearchText(event)
     {
         setSearchText(event.target.value);
+    }
+
+    function handleChangeDays(e)
+    {
+        setdays(e.target.value);
     }
 
     function buttonStatus(course)
@@ -141,6 +148,22 @@ function Events(props)
                             'aria-label': 'Search'
                         }}
                         onChange={handleSearchText}
+                        variant="outlined"
+                        InputLabelProps={{
+                            shrink: true
+                        }}
+                    />
+                    <TextField
+                        label="Max Days for past events"
+                        placeholder="Enter max days..."
+                        className="flex w-full sm:w-320 mb-16 sm:mb-0 mx-16"
+                        value={days}
+                        inputProps={{
+                            'aria-label': 'Days'
+                        }}
+                        error ={(days && days.length > 0 && !isNaN(parseInt(days))? false : true )}
+                        helperText={(days && days.length > 0?(isNaN(parseInt(days))?"Enter a integer value":""):"Max Days cannot be empty")}
+                        onChange={handleChangeDays}
                         variant="outlined"
                         InputLabelProps={{
                             shrink: true
@@ -216,6 +239,19 @@ function Events(props)
                                                         >
                                                             View
                                                         </Button>
+                                                        {
+                                                        (FuseUtils.hasPermission(authRoles.organisers, user.role))
+                                                         &&
+                                                            <Button
+                                                            className="justify-center px-32 text-red"
+                                                            onClick={()=>{
+                                                                dispatch(Actions.deleteEvent(event.id));
+                                                                dispatch(Actions.getPastEvents(days));
+                                                            }}
+                                                            >
+                                                                Delete
+                                                            </Button>
+                                                        }
                                                     </CardActions>
                                                     <LinearProgress
                                                         className="w-full"

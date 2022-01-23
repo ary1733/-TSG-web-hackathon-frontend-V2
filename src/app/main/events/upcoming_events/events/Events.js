@@ -16,7 +16,7 @@ import {
     LinearProgress
 } from '@material-ui/core';
 import {makeStyles, useTheme} from '@material-ui/styles';
-import {FuseAnimate, FuseAnimateGroup} from '@fuse';
+import {FuseAnimate, FuseAnimateGroup, FuseUtils} from '@fuse';
 import {useDispatch, useSelector} from 'react-redux';
 import withReducer from 'app/store/withReducer';
 import clsx from 'clsx';
@@ -25,6 +25,7 @@ import {Link} from 'react-router-dom';
 import * as Actions from '../store/actions';
 import reducer from '../store/reducers';
 import moment from 'moment';
+import { authRoles } from 'app/auth';
 
 const useStyles = makeStyles(theme => ({
     header    : {
@@ -48,7 +49,7 @@ function Events(props)
     const dispatch = useDispatch();
     const events = useSelector(({upcomingEvents}) => upcomingEvents.upcoming_events.data);
     const categories = useSelector(({upcomingEvents}) => upcomingEvents.upcoming_events.categories);
-
+    const user = useSelector(({auth}) => auth.user);
     const classes = useStyles(props);
     const theme = useTheme();
     const [filteredData, setFilteredData] = useState(null);
@@ -215,6 +216,19 @@ function Events(props)
                                                         >
                                                             View
                                                         </Button>
+                                                        {
+                                                        (FuseUtils.hasPermission(authRoles.organisers, user.role))
+                                                         &&
+                                                            <Button
+                                                            className="justify-center px-32 text-red"
+                                                            onClick={()=>{
+                                                                dispatch(Actions.deleteEvent(event.id));
+                                                                dispatch(Actions.getUpcoming());
+                                                            }}
+                                                            >
+                                                                Delete
+                                                            </Button>
+                                                        }
                                                     </CardActions>
                                                     <LinearProgress
                                                         className="w-full"

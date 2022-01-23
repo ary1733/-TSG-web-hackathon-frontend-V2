@@ -1,7 +1,9 @@
+import { showMessage } from 'app/store/actions';
 import axios from 'axios';
 
 export const GET_UPCOMING = '[EVENTS] GET_UPCOMING';
 export const GET_CATEGORIES = '[EVENTS] GET CATEGORIES';
+export const DELETE_EVENT = '[EVENTS] DELETE EVENT';
 
 export function getUpcoming()
 {
@@ -16,6 +18,24 @@ export function getUpcoming()
             })
         }
         );
+}
+
+export function deleteEvent(event_id)
+{
+    const request = fetch(`/api/events/${event_id}/delete/`, {
+        method: 'POST',
+        credentials: 'include'
+    })
+    
+    return (dispatch) =>
+        request.then(async (response) => {
+            let data = await response.json();
+            dispatch(showMessage({message: data.message}));
+            return dispatch({
+                type   : DELETE_EVENT,
+                payload: data
+            })
+        })
 }
 
 export function getCategories()
