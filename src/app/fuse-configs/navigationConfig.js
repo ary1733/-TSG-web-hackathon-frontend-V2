@@ -19,6 +19,13 @@
                         'auth' : authRoles.student
                     },
                     {
+                        'id'   : 'update-users',
+                        'title': 'Update Users',
+                        'type' : 'item',
+                        'url'  : '/profile/update-users',
+                        'auth' : authRoles.admin
+                    },
+                    {
                         'id'   : 'complaints',
                         'title': 'Complaints',
                         'type' : 'collapse',
