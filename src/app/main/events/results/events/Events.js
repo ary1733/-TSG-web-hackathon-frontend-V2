@@ -154,7 +154,7 @@ function Events(props)
                         }}
                     />
                     <TextField
-                        label="Max Days for past events"
+                        label="Max event age in days"
                         placeholder="Enter max days..."
                         className="flex w-full sm:w-320 mb-16 sm:mb-0 mx-16"
                         value={days}
