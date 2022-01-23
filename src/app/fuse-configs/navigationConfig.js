@@ -142,7 +142,27 @@
                         ]        
                     }
         ]
-    }
+    },
+    {
+        'id'   : 'News',
+        'title': 'News',
+        'type' : 'collapse',
+        'icon' : 'unsubscribe',
+        'badge'   : {
+            'title': 4,
+            'bg'   : '#525E8A',
+            'fg'   : '#FFFFFF'
+        },
+        'children': [
+            {
+                'id'   : 'mail-news',
+                'title': 'Mail News',
+                'type' : 'item',
+                'url'  : '/news/mail-news',
+                'auth' : authRoles.organisers
+            }
+        ]
+    },
 ];
 
 export default navigationConfig;

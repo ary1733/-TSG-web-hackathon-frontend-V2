@@ -5,15 +5,16 @@ import {ExampleConfig} from 'app/main/example/ExampleConfig';
 import LoginPage from 'app/main/login/LoginPage';
 import { LoginConfig } from 'app/main/login/LoginConfig';
 import { EventsConfig } from 'app/main/events/EventsConfig';
-import { profileConfig} from 'app/main/profile/profleConfig';
+import { profileConfig} from 'app/main/profile/profileConfig';
 import { studentsPointConfig } from 'app/main/studentsPoint/studentsPointConfig';
-
+import {newsConfig} from 'app/main/news/newsconfig';
 
 const routeConfigs = [
     LoginConfig,
     ...EventsConfig,
     ...profileConfig,
-    ...studentsPointConfig
+    ...studentsPointConfig,
+    newsConfig
 ];
 
 const routes = [
