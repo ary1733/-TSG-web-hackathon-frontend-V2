@@ -356,7 +356,7 @@ function Event(props)
                                     <MuiPickersUtilsProvider utils={DateFnsUtils} fullWidth >
                                             <KeyboardDateTimePicker 
                                             label = "Start"
-                                            value = {form.start?form.start:""}
+                                            value = {form.start}
                                             onChange = {handleDateChangeStart}
                                             />  
                                     </MuiPickersUtilsProvider>
@@ -366,7 +366,7 @@ function Event(props)
                                     <MuiPickersUtilsProvider utils={DateFnsUtils} fullWidth>
                                         <KeyboardDateTimePicker 
                                         label = "End"
-                                        value = {form.end?form.end:""}
+                                        value = {form.end}
                                         onChange = {handleDateChangeEnd}
                                         />
                                 </MuiPickersUtilsProvider>
