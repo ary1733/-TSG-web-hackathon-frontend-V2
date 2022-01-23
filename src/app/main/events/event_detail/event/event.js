@@ -30,7 +30,7 @@ function EventInfo(props)
     const event = useSelector(({Events}) => Events.event);
     const [report, setreport] = useState(null);
     const user = useSelector(({auth}) => auth.user);
-    const contents = ["poster", "introduction", "procedure", "jugde_criteria", "timeline", "venue", "organiser", "report"];
+    const contents = ["poster", "introduction", "procedure", "jugde_criteria", "timeline", "venue", "Posted By", "report", "results"];
     const classes = useStyles(props);
     const pageLayout = useRef(null);
     let activeStep = 0;

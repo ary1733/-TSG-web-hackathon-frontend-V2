@@ -29,7 +29,7 @@ export function saveevent(data)
     return (dispatch) =>
         request.then((response) => {
 
-                dispatch(showMessage({message: 'event Saved'}));
+                dispatch(showMessage({message: 'Event Saved'}));
 
                 return dispatch({
                     type   : SAVE_Event,

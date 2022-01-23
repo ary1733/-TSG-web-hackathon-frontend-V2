@@ -220,7 +220,8 @@ function Academics(props)
                                                             // to={{ pathname: `/events/${event.id}/${event.title}`, state: { event_id: event.id, prevPath: window.location.pathname} }} // event page
                                                             // href= {`${academic.attachment_url}?token=${jwtService.getAccessToken()}`}
                                                             // component={Link}
-                                                            onClick={() =>{Axios({
+                                                            onClick={() =>{
+                                                                Axios({
                                                                 url: academic.attachment_url, //your url
                                                                 method: 'GET',
                                                                 responseType: 'blob', // important

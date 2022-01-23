@@ -22,6 +22,13 @@ const eventsReducer = function (state = initialState, action) {
                 categories: action.payload
             };
         }
+        case Actions.DELETE_EVENT:
+        {
+            return {
+                ...state,
+                ...action.payload
+            };
+        }
         default:
         {
             return state;
